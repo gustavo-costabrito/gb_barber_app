@@ -1,0 +1,16 @@
+html {
+    font-size: 100%;
+
+    body {
+        section {
+            min-height: 100vh;
+        }
+
+        .site {
+            max-width: 93.02%;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+    }
+}

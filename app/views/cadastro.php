@@ -11,7 +11,7 @@
 
     <section class="cadastro">
         <div class="site">
-            <div class="form-cadastro">
+            <form class="form-cadastro" id="form-cadastro" action="" method="post">
                 <div class="form-cadastro__title">
                     <h2>Realização do <span>cadastro</span></h2>
                 </div>
@@ -33,17 +33,48 @@
                         <input type="password" placeholder="senha123..." name="senhaCadastro" id="senhaCadastro">
                     </div>
                     <div class="__content__button">
-                        <a href="<?= URL?>login">
+                        <a href="<?= URL ?>login">
                             <button type="button">Retornar ao login</button>
                         </a>
-                        <button type="button">Salvar</button>
+                        <button type="submit">Salvar</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="fundo-cadastro" style="background-image: url(<?= URL ?>assets/img/fundo-cadastro.jpg);"></div>
     </section>
+
+    <!-- AJAX -->
+     <script>
+        document.getElementById('form-cadastro').addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const input = {
+                'nome': document.getElementById('nomeCadastro').value,
+                'email': document.getElementById('emailCadastro').value,
+                'whatsapp': document.getElementById('whatsappCadastro').value,
+                'senha': document.getElementById('senhaCadastro').value
+            };
+
+            fetch(`<?= URL?>cadastro/add_cadastro`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'Application/json'
+                },
+                body: JSON.stringify(input)
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                alert(data);
+            })
+
+            .catch(error => {
+                console.error(error);
+            })
+        })
+     </script>
 
 
     <script src="<?= URL ?>assets/js/script.js"></script>

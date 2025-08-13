@@ -6,7 +6,7 @@
     <?php require_once(__DIR__ . '/includes/header.php') ?>
 
     <main>
-        <section class="banner" style="background-image: url(<?= URL?>assets/img/fundo-banner.jpg);">
+        <section class="banner" style="background-image: url(<?= URL ?>assets/img/fundo-banner.jpg);">
             <div class="site">
                 <h2>
                     Seja bem vindo,
@@ -21,14 +21,30 @@
 
         <section class="carrosel">
             <div class="site">
-                <div class="carrosel_1">
+                <div class="carrosel">
                     <h2>Principais Serviços</h2>
                     <span>Principais Serviços</span>
                 </div>
-                <div class="carrosel_2">
-                    <h2>Principais Serviços</h2>
-                    <span>Principais Serviços</span>
-                </div>
+            </div>
+        </section>
+
+        <section class="servicos">
+            <div class="site">
+                <?php foreach ($servicos as $atributo) : ?>
+                    <?php extract($atributo) ?>
+                    <div class="servico1" data-id="<?= $id_combo + 3 ?? $id_servico?>" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico?>);">
+                        <div class="texto-servico">
+                            <h2><?= $nome_combo ?? $nome_servico ?></h2>
+                            <h3>R$<?= $valor_combo ?? $valor_servico ?></h3>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <section class="contato">
+            <div class="site">
+                
             </div>
         </section>
     </main>

@@ -1,6 +1,7 @@
 <?php
 
 define('URL', 'https://localhost/gb_barber_app/public/');
+define('URL_API', 'https://localhost/gb_barber/public/api/');
 
 spl_autoload_register(function($class){
     $caminhos = [

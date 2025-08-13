@@ -60,23 +60,23 @@ html {
         }
 
         h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            p,
-            a,
-            li,
-            button,
-            input,
-            span,
-            label {
-                font-family: "Antonio", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 600;
-                font-style: normal;
-                line-height: 1.2;
-            }
+        h2,
+        h3,
+        h4,
+        h5,
+        p,
+        a,
+        li,
+        button,
+        input,
+        span,
+        label {
+            font-family: "Antonio", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+            line-height: 1.2;
+        }
     }
 }
 
@@ -262,6 +262,8 @@ html {
 }
 
 
+
+
 /* Cadastro */
 .cadastro {
     display: grid;
@@ -371,6 +373,8 @@ html {
 
 
 
+
+
 /* Inicio */
 .banner {
     background-size: cover;
@@ -414,7 +418,7 @@ html {
                 }
             }
 
-            button{
+            button {
                 background-color: var(--cor-terciaria);
                 color: var(--cor-secundaria);
                 height: var(--height-button);
@@ -438,41 +442,76 @@ html {
     z-index: 0;
 }
 
-.carrosel{
+.carrosel {
     display: flex;
     align-items: center;
     background-color: var(--cor-principal);
     min-height: 5rem;
 
-    .site{
+    .site {
         display: flex;
 
-        >div{
-            display: flex;
-            gap: 3rem;
-
-            h2{
+        .carrosel {
+            h2 {
                 color: var(--cor-secundaria);
-                font-size: var(--font-secundaria);
             }
 
-            span{
+            span {
                 color: var(--cor-terciaria);
-                font-size: var(--font-secundaria);
             }
-        }
-
-        .carrosel_2{
-            margin-left: 4rem;
-            animation: slide 12s infinite linear;
-        }
-
-        .carrosel_1{
-            position: absolute;
-            left: -300px;
         }
     }
 }
+
+.servicos {
+    background-color: var(--cor-principal);
+    min-height: 70vh;
+
+    .site {
+        display: grid;
+        grid-template-columns: 45% 45%;
+        justify-content: space-around;
+        row-gap: 3rem;
+
+        >div {
+            display: flex;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            justify-content: end;
+            width: 100%;
+            height: 170px;
+            border-radius: 20px;
+            outline: solid 2px var(--cor-terciaria);
+
+            .texto-servico{
+                color: var(--cor-secundaria);
+                display: flex;
+                flex-direction: column;
+                margin-left: 0.5rem;
+                margin-bottom: 1rem;
+                font-size: var(--font-terciaria);
+                gap: 0.5rem;
+                z-index: 1;
+            }
+        }
+
+        >div::after{
+            content: "";
+            position: absolute;
+            background-color: var(--cor-principal);
+            width: 180px;
+            height: 170px;
+            border-radius: 20px;
+            z-index: 0;
+            opacity: 0.5;
+        }
+    }
+}
+
+
+
+
 
 /* Footer */
 footer {

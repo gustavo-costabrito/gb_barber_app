@@ -44,7 +44,29 @@
 
         <section class="contato">
             <div class="site">
-                
+                <h2>Tem uma duvida?<span> Fale Conosco</span></h2>
+                <form action="" method="post">
+                    <div class="nomeContato">
+                        <label for="nomeContato">Nome:</label>
+                        <input type="text" placeholder="Seu Nome Completo" name="nomeContato" id="nomeContato">
+                    </div>
+                    <div class="emailContato">
+                        <label for="emailContato">E-mail:</label>
+                        <input type="text" placeholder="seuemail@dominio.com" name="emailContato" id="emailContato">
+                    </div>
+                    <div class="whatsappContato">
+                        <label for="whatsappContato">Whatsapp:</label>
+                        <input type="text" placeholder="(00) 00000-0000" name="whatsappContato" id="whatsappContato">
+                    </div>
+                    <div class="mensagemContato">
+                        <label for="mensagemContato">Mensagem:</label>
+                        <textarea name="mensagemContato" placeholder="Sua mensagem que sera respondida..." id="mensagemContato"></textarea>
+                    </div>
+                    <div class="btnEnviarLimpar">
+                        <p id="limparForm">Limpar todos os campos</p>
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>

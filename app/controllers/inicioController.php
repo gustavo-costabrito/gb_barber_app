@@ -1,7 +1,9 @@
 <?php
 
-class InicioController extends Controller{
-    public function index(){
+class InicioController extends Controller
+{
+    public function index()
+    {
         $dados = [];
 
         $ch = curl_init(URL_API . 'listar_servicos');
@@ -10,7 +12,7 @@ class InicioController extends Controller{
             CURLOPT_POST => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [
-                'Accept: application/json'
+                'Accept: application/json',
             ],
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_SSL_VERIFYPEER => false
@@ -22,12 +24,10 @@ class InicioController extends Controller{
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        curl_close($ch);
-
-        if($erro){
+        if ($erro) {
             die("Erro: $erro");
         }
-
+        
         $dados['servicos'] = json_decode($resposta, true);
 
         $this->render('inicio', $dados);

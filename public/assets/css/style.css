@@ -70,7 +70,8 @@ html {
         button,
         input,
         span,
-        label {
+        label,
+        textarea {
             font-family: "Antonio", sans-serif;
             font-optical-sizing: auto;
             font-weight: 600;
@@ -450,8 +451,13 @@ html {
 
     .site {
         display: flex;
+        justify-content: center;
 
         .carrosel {
+            display: flex;
+            gap: 2rem;
+            font-size: var(--font-secundaria);
+            
             h2 {
                 color: var(--cor-secundaria);
             }
@@ -505,6 +511,90 @@ html {
             border-radius: 20px;
             z-index: 0;
             opacity: 0.5;
+        }
+    }
+}
+
+.contato{
+    background-color: var(--cor-principal);
+    min-height: 85vh;
+    padding-top: 4rem;
+
+    .site{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+
+        h2{
+            text-align: center;
+            color: var(--cor-secundaria);
+            font-size: var(--font-principal);
+
+            span{
+                color: var(--cor-terciaria);
+            }
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            div{
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+
+                label{
+                    color: var(--cor-secundaria);
+                    font-size: var(--font-secundaria);
+                }
+
+                input{
+                    background-color: var(--cor-auxiliar);
+                    font-size: var(--font-terciaria);
+                    height: var(--height-input);
+                    border-radius: 5px;
+                    padding-left: 1rem;
+                    border: none;
+                    outline: solid 2px var(--cor-border);
+                }
+
+                textarea{
+                    background-color: var(--cor-auxiliar);
+                    font-size: var(--font-terciaria);
+                    height: 120px;
+                    border-radius: 5px;
+                    padding-left: 1rem;
+                    padding-top: 1rem;
+                    border: none;
+                    outline: solid 2px var(--cor-border);
+                }
+            }
+
+            .btnEnviarLimpar{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                p{
+                    color: var(--cor-terciaria);
+                    font-size: var(--font-secundaria);
+                    text-decoration: underline;
+                    display: inline;
+                }
+
+                button{
+                    background-color: var(--cor-terciaria);
+                    color: var(--cor-secundaria);
+                    font-size: var(--font-secundaria);
+                    height: var(--height-button);
+                    width: var(--width-button);
+                    border-radius: 20px;
+                    border: none;
+                    outline: none;
+                }
+            }
         }
     }
 }

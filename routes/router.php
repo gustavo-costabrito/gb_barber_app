@@ -24,7 +24,7 @@ class Router
                     break;
 
                 default:
-                    $param[] = '';
+                    $param[] = $valor;
                     break;
             }
         }

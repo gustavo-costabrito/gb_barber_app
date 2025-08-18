@@ -601,6 +601,35 @@ html {
 
 
 
+/* Detalhes */
+.detalhe{
+    background-color: var(--cor-principal);
+    min-height: 78vh;
+    display: grid;
+
+    .site{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+
+        .tituloTela{
+            display: flex;
+            justify-content: start;
+            font-size: var(--font-principal);
+
+            h2{
+                color: var(--cor-secundaria);
+            }
+
+            span{
+                color: var(--cor-terciaria);
+            }
+        }
+    }
+}
+
+
+
 
 
 /* Footer */

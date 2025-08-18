@@ -32,7 +32,7 @@
             <div class="site">
                 <?php foreach ($servicos as $atributo) : ?>
                     <?php extract($atributo) ?>
-                    <div class="servico1" data-id="<?= $id_combo + 3 ?? $id_servico?>" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico?>);">
+                    <div class="servico" data-name="<?= Controller::tratar_url($nome_combo ?? $nome_servico)?>" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico ?>);">
                         <div class="texto-servico">
                             <h2><?= $nome_combo ?? $nome_servico ?></h2>
                             <h3>R$<?= $valor_combo ?? $valor_servico ?></h3>
@@ -41,6 +41,16 @@
                 <?php endforeach; ?>
             </div>
         </section>
+
+        <script>
+            document.querySelectorAll('.servico').forEach((servico) => {
+                servico.addEventListener('click', function(){
+                    const nome = this.dataset.name;
+
+                    window.location.href = `<?= URL?>detalhe/servico/${nome}`;
+                })
+            })
+        </script>
 
         <section class="contato">
             <div class="site">

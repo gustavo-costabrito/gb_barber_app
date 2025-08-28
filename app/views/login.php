@@ -15,7 +15,7 @@
                     <h2>Faça <span>login</span> conosco para ter acesso á uma experiência <span>completa</span></h2>
                 </div>
                 <div class="form-login__content">
-                    <form action="" method="post">
+                    <form action="" method="post" id="formLogin">
                         <div class="__content__email">
                             <label for="emailLogin">E-mail:</label>
                             <input type="email" name="emailLogin" placeholder="seuemail@dominio.com" id="emailLogin">
@@ -43,7 +43,41 @@
         
         <div class="fundo-login" style="background-image: url(<?= URL?>assets/img/fundo-login.jpg);"></div>
     </section>
-    
+
+    <!-- AJAX -->
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const input = {
+                'email':document.getElementById('emailLogin').value,
+                'senha':document.getElementById('senhaLogin').value
+            };
+
+            fetch(`<?= URL?>login/verificar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(input)
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                if(!data.sucesso){
+                    alert(data);
+                } else{
+                    alert(data.sucesso);
+
+                    window.location.href = `<?= URL?>inicio`;
+                }
+            })
+
+            .catch(error => {
+                console.error(error);
+            })
+        })
+    </script>
 
     <script src="<?= URL?>assets/js/script.js"></script>
 </body>

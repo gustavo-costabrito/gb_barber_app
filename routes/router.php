@@ -2,7 +2,7 @@
 
 class Router
 {
-    public static function routers()
+    public static function routes()
     {
         $url = $_GET['url'];
 

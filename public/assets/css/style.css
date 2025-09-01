@@ -46,6 +46,28 @@ html {
             width: 100%;
             height: 100%;
             margin: 0 auto;
+
+            .tituloTela {
+                display: flex;
+                justify-content: center;
+                font-size: var(--font-principal);
+                gap: .5rem;
+
+                img{
+                    width: 2.5rem;
+                    position: absolute;
+                    margin-right: 22rem;
+                    cursor: pointer;
+                }
+
+                h2 {
+                    color: var(--cor-secundaria);
+                }
+
+                span {
+                    color: var(--cor-terciaria);
+                }
+            }
         }
 
         footer {
@@ -71,7 +93,8 @@ html {
         input,
         span,
         label,
-        textarea {
+        textarea,
+        select {
             font-family: "Antonio", sans-serif;
             font-optical-sizing: auto;
             font-weight: 600;
@@ -457,7 +480,7 @@ html {
             display: flex;
             gap: 2rem;
             font-size: var(--font-secundaria);
-            
+
             h2 {
                 color: var(--cor-secundaria);
             }
@@ -490,7 +513,7 @@ html {
             border-radius: 20px;
             outline: solid 2px var(--cor-terciaria);
 
-            .texto-servico{
+            .texto-servico {
                 color: var(--cor-secundaria);
                 display: flex;
                 flex-direction: column;
@@ -502,7 +525,7 @@ html {
             }
         }
 
-        >div::after{
+        >div::after {
             content: "";
             position: absolute;
             background-color: var(--cor-principal);
@@ -515,42 +538,42 @@ html {
     }
 }
 
-.contato{
+.contato {
     background-color: var(--cor-principal);
     min-height: 85vh;
     padding-top: 4rem;
 
-    .site{
+    .site {
         display: flex;
         flex-direction: column;
         gap: 5rem;
 
-        h2{
+        h2 {
             text-align: center;
             color: var(--cor-secundaria);
             font-size: var(--font-principal);
 
-            span{
+            span {
                 color: var(--cor-terciaria);
             }
         }
 
-        form{
+        form {
             display: flex;
             flex-direction: column;
             gap: 2rem;
 
-            div{
+            div {
                 display: flex;
                 flex-direction: column;
                 gap: 0.8rem;
 
-                label{
+                label {
                     color: var(--cor-secundaria);
                     font-size: var(--font-secundaria);
                 }
 
-                input{
+                input {
                     background-color: var(--cor-auxiliar);
                     font-size: var(--font-terciaria);
                     height: var(--height-input);
@@ -560,7 +583,7 @@ html {
                     outline: solid 2px var(--cor-border);
                 }
 
-                textarea{
+                textarea {
                     background-color: var(--cor-auxiliar);
                     font-size: var(--font-terciaria);
                     height: 120px;
@@ -572,19 +595,19 @@ html {
                 }
             }
 
-            .btnEnviarLimpar{
+            .btnEnviarLimpar {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
 
-                p{
+                p {
                     color: var(--cor-terciaria);
                     font-size: var(--font-secundaria);
                     text-decoration: underline;
                     display: inline;
                 }
 
-                button{
+                button {
                     background-color: var(--cor-terciaria);
                     color: var(--cor-secundaria);
                     font-size: var(--font-secundaria);
@@ -602,32 +625,127 @@ html {
 
 
 /* Detalhes */
-.detalhe{
+.detalhe {
     background-color: var(--cor-principal);
     min-height: 78vh;
     display: grid;
 
-    .site{
+    .site {
         display: flex;
         flex-direction: column;
         gap: 5rem;
 
-        .tituloTela{
+        .tituloTela {
             display: flex;
             justify-content: start;
             font-size: var(--font-principal);
 
-            h2{
+            h2 {
                 color: var(--cor-secundaria);
             }
 
-            span{
+            span {
                 color: var(--cor-terciaria);
             }
         }
     }
 }
 
+
+
+/* Faça Agendamento */
+.agendamento{
+    background-color: var(--cor-principal);
+    min-height: 100vh;
+
+    .site{
+        padding-top: 2rem;
+
+        .conteudoAgendamento{
+            margin-top: 5rem;
+
+            form{
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                >div{
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
+
+                    input,
+                    select{
+                        background-color: var(--cor-auxiliar);
+                        color: var(--cor-secundaria);
+                        height: var(--height-input);
+                        font-size: var(--font-terciaria);
+                        outline: none;
+                        border: solid 2px var(--cor-border);
+                        border-radius: 10px;
+                        padding-left: 1rem;
+                    }
+
+                    label{
+                        color: var(--cor-secundaria);
+                        font-size: var(--font-terciaria);
+                    }
+                }
+
+                .servicoAgendamento{
+                    font-size: var(--font-secundaria);
+                    gap: 4rem;
+
+                    h2{
+                        text-align: center;
+                        color: var(--cor-secundaria);
+
+                        span{
+                            color: var(--cor-terciaria);
+                        }
+                    }
+
+                    .servicosCombos{
+                        display: grid;
+                        grid-template-columns: 45% 45%;
+                        row-gap: 2rem;
+                        justify-content: space-between;
+
+                        >div{
+                            height: 180px;
+                            border-radius: 20px;
+                            border: solid 2px var(--cor-terciaria);
+
+                            .selecionar{
+                                background-color: var(--cor-secundaria);
+                                border-radius: 50%;
+                                height: 3rem;
+                                width: 3rem;
+                            }
+                        }
+                    }
+                }
+
+                button{
+                    background-color: var(--cor-terciaria);
+                    color: var(--cor-secundaria);
+                    height: var(--height-button);
+                    border: none;
+                    border-radius: 10px;
+                    outline: none;
+                    font-size: var(--font-secundaria);
+                    cursor: pointer;
+                    transition: 0.3s all;
+                }
+
+                button:hover{
+                    background-color: var(--cor-secundaria);
+                    color: var(--cor-terciaria);
+                }
+            }
+        }
+    }
+}
 
 
 

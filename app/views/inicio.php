@@ -19,7 +19,18 @@ if(!isset($_SESSION['login'])){
             <div class="site">
                 <h2>
                     Seja bem vindo,
-                    Gustavo Costa
+                    <?php
+                    
+                    $nome = str_word_count($dadosLogin['nome'], 1);
+
+                    $nomeExibido = [
+                        $nome[0],
+                        $nome[1]
+                    ];
+
+                    echo implode(' ', $nomeExibido);
+                    
+                    ?>
                 </h2>
                 <div class="banner__content">
                     <h3>Descubra o melhor serviço de barbearia na <span>GB BARBER</span></h3>
@@ -67,15 +78,15 @@ if(!isset($_SESSION['login'])){
                 <form action="" method="post">
                     <div class="nomeContato">
                         <label for="nomeContato">Nome:</label>
-                        <input type="text" placeholder="Seu Nome Completo" name="nomeContato" id="nomeContato">
+                        <input type="text" placeholder="Seu Nome Completo" value="<?= $dadosLogin['nome']?>" name="nomeContato" id="nomeContato" disabled>
                     </div>
                     <div class="emailContato">
                         <label for="emailContato">E-mail:</label>
-                        <input type="text" placeholder="seuemail@dominio.com" name="emailContato" id="emailContato">
+                        <input type="text" placeholder="seuemail@dominio.com" value="<?= $dadosLogin['email']?>" name="emailContato" id="emailContato" disabled>
                     </div>
                     <div class="whatsappContato">
                         <label for="whatsappContato">Whatsapp:</label>
-                        <input type="text" placeholder="(00) 00000-0000" name="whatsappContato" id="whatsappContato">
+                        <input type="text" placeholder="(00) 00000-0000" value="<?= $dadosLogin['whatsapp']?>" name="whatsappContato" id="whatsappContato" disabled>
                     </div>
                     <div class="mensagemContato">
                         <label for="mensagemContato">Mensagem:</label>

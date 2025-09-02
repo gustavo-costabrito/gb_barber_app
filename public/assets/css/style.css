@@ -552,6 +552,7 @@ html {
 
                 input{
                     background-color: var(--cor-auxiliar);
+                    color: var(--cor-secundaria);
                     font-size: var(--font-terciaria);
                     height: var(--height-input);
                     border-radius: 5px;
@@ -563,6 +564,7 @@ html {
                 textarea{
                     background-color: var(--cor-auxiliar);
                     font-size: var(--font-terciaria);
+                    color: var(--cor-secundaria);
                     height: 120px;
                     border-radius: 5px;
                     padding-left: 1rem;
@@ -610,12 +612,14 @@ html {
     .site{
         display: flex;
         flex-direction: column;
-        gap: 5rem;
+        justify-content: start;
+        gap: 6rem;
 
         .tituloTela{
             display: flex;
             justify-content: start;
             font-size: var(--font-principal);
+            margin-top: 4rem;
 
             h2{
                 color: var(--cor-secundaria);
@@ -623,6 +627,76 @@ html {
 
             span{
                 color: var(--cor-terciaria);
+            }
+        }
+
+        .conteudoDetalhe{
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+
+            .servicoCombo{
+                background-size: cover;
+                background-position: center;
+                color: var(--cor-secundaria);
+                font-size: var(--font-secundaria);
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 1.6rem;
+                border: solid 2px var(--cor-terciaria);
+                border-radius: 20px;
+
+                .fundoServicoCombo{
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 300px;
+                    width: 400px;
+                    background-color: var(--cor-principal);
+                    opacity: 0.6;
+                    border-radius: 20px;
+                }
+
+                p,
+                .nomeValor{
+                    z-index: 1;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                p{
+                    line-height: 1.5;
+                }
+
+                .nomeValor{
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                button{
+                    background-color: var(--cor-secundaria);
+                    color: var(--cor-terciaria);
+                    font-size: var(--font-terciaria);
+                    width: 35%;
+                    height: 2rem;
+                    z-index: 1;
+                    border: none;
+                    border-radius: 10px;
+                    margin-left: 15.4rem;
+                }
+            }
+
+            >button{
+                height: var(--height-button);
+                background-color: var(--cor-terciaria);
+                color: var(--cor-secundaria);
+                font-size: var(--font-secundaria);
+                border: none;
+                outline: none;
+                border-radius: 10px;
             }
         }
     }

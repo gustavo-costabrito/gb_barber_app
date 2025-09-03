@@ -786,8 +786,10 @@ html {
                         justify-content: space-between;
 
                         >div{
-                            display: flex;
-                            flex-direction: row-reverse;
+                            background-size: cover;
+                            background-position: center;
+                            display: grid;
+                            grid-template-columns: 70% 30%;
                             justify-content: space-between;
                             height: 180px;
                             border-radius: 20px;
@@ -798,14 +800,15 @@ html {
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                height: 3.5rem;
-                                width: 3.5rem;
+                                height: 3rem;
+                                width: 3rem;
                                 border-radius: 50%;
+                                cursor: pointer;
 
                                 #selecionado{
                                     background-color: var(--cor-auxiliar);
-                                    height: 2.5rem;
-                                    width: 2.5rem;
+                                    height: 2rem;
+                                    width: 2rem;
                                     border-radius: 50%;
                                 }
                             }
@@ -818,6 +821,10 @@ html {
                                 gap: .5rem;
                                 padding-left: .5rem;
                                 padding-bottom: 1rem;
+
+                                h3{
+                                    font-size: 1rem;
+                                }
                             }
                         }
                     }

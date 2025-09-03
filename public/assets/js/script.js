@@ -14,4 +14,15 @@ document.getElementById('dataAgendamento').addEventListener('change', function()
 
         document.getElementById('horarioAgendamento').disabled = false;
     }
-})
+});
+
+
+document.querySelectorAll('.selecionar').forEach((selecionar) => {
+    selecionar.addEventListener('click', function(){
+        if(document.getElementById('selecionado')){
+            document.getElementById('selecionado').remove();
+        }
+
+        this.innerHTML = "<div id='selecionado'></div>";
+    });
+});

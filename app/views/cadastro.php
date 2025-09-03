@@ -11,7 +11,7 @@
 
     <section class="cadastro">
         <div class="site">
-            <form class="form-cadastro" id="form-cadastro" action="" method="post">
+            <form class="form-cadastro" id="formCadastro" action="" method="post">
                 <div class="form-cadastro__title">
                     <h2>Realização do <span>cadastro</span></h2>
                 </div>
@@ -47,27 +47,33 @@
 
     <!-- AJAX -->
      <script>
-        document.getElementById('form-cadastro').addEventListener('submit', function(e){
+        document.getElementById('formCadastro').addEventListener('submit', function(e){
             e.preventDefault();
 
             const input = {
                 'nome': document.getElementById('nomeCadastro').value,
                 'email': document.getElementById('emailCadastro').value,
                 'whatsapp': document.getElementById('whatsappCadastro').value,
-                'senha': document.getElementById('senhaCadastro').value
+                'senha': document.getElementById('senhaCadastro').value,
             };
 
-            fetch(`<?= URL?>cadastro/add_cadastro`, {
+            fetch(`<?= URL?>cadastro/adicionar`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type':'Application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(input)
             })
 
             .then(response => response.json())
             .then(data => {
-                alert(data);
+                if(data.sucesso){
+                    alert(data.sucesso);
+
+                    window.location.href = "<?= URL?>inicio";
+                } else{
+                    console.log(data);
+                }
             })
 
             .catch(error => {

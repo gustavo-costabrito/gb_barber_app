@@ -68,8 +68,8 @@
                     alert(data);
                 } else{
                     alert(data.sucesso);
-
-                    window.location.href = `<?= URL?>inicio`;
+                    
+                    window.location.href = "<?= URL?>inicio";
                 }
             })
 

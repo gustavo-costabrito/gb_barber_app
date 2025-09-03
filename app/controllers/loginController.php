@@ -55,10 +55,10 @@ class LoginController extends Controller{
 
         $resposta = json_decode($resposta, true);
 
-        $_SESSION['login'] = $resposta;
+        $_SESSION['login'] = $resposta['sucesso'];
 
         echo json_encode([
-            'sucesso' => 'Login feito com sucesso'
+            'sucesso' => 'Login realizado com sucesso'
         ]);
         return;
     }

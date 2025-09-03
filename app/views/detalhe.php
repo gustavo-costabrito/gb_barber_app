@@ -15,12 +15,14 @@
                     <h2>Saiba mais sobre esse <span>servico:</span></h2>
                 </div>
                 <div class="conteudoDetalhe">
-                    <div class="servicoCombo">
+                    <div class="servicoCombo" style="background-image: url(<?= URL?>assets/img/<?= $imagem_combo ?? $imagem_servico?>);">
                         <p><?= $descricao_combo ?? $descricao_servico?></p>
                         <div class="nomeValor">
                             <h2><?= $nome_combo ?? $nome_servico?></h2>
-                            <h3><?= $valor_combo ?? $valor_servico?></h3>
+                            <h3>R$<?= $valor_combo ?? $valor_servico?></h3>
                         </div>
+                        <button type="button">Agendar Servico</button>
+                        <div class="fundoServicoCombo"></div>
                     </div>
                     <button type="button">Veja mais</button>
                 </div>

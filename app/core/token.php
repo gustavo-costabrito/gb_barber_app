@@ -12,17 +12,34 @@ class Token
 
         $signeNovo = hash_hmac('sha256', "$header.$payload", $key);
 
-        if(!hash_equals($signeNovo, $signe)){
+        $signeNovo = self::base64Url_encode($signeNovo);
+
+        if(!hash_equals($signe, $signeNovo)){
             return null;
         }
 
         $payloadNormal = self::base64Url_decode($payload);
 
-        if(time() > $payloadNormal['exp']){
+        $tempo = time();
+
+        if($tempo > $payloadNormal['exp']){
             return null;
         }
 
         return $payloadNormal;
+    }
+
+    private static function base64Url_encode(array|string $dados): string
+    {
+        $dados = json_encode($dados);
+
+        $dados = base64_encode($dados);
+
+        $dados = strtr($dados, '+/', '-_');
+
+        $dados = rtrim($dados, '=');
+
+        return $dados;
     }
 
     private static function base64Url_decode(string $base64): array

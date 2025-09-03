@@ -1,9 +1,9 @@
 <?php
 
-if(!isset($_SESSION['login'])){
-    header('Location: ' . URL . 'login');
-    exit;
-}
+// if(!isset($_SESSION['login'])){
+//     header('Location: ' . URL . 'login');
+//     exit;
+// }
 
 ?>
 

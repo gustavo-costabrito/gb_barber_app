@@ -9,12 +9,26 @@ class CadastroController extends Controller
         $this->render('cadastro', $dados);
     }
 
-    public function add_cadastro(): void
+    public function adicionar(): void
     {
-        header('Accept: application/json');
-
         $input = file_get_contents('php://input');
         $input = json_decode($input, true);
+
+        header('Content-Type: application/json');
+
+        foreach($input as $campo => $valor){
+            if(empty(trim($valor))){
+                echo json_encode([
+                    'erro' => match($campo){
+                        'nome' => 'Seu nome completo nao foi preenchido, tentar novamente com todos os campos preenchidos',
+                        'email' => 'Seu E-mail nao foi preenchido, tentar novamento com todos os campos preenchidos',
+                        'whatsapp' => 'Seu numero de whatsapp nao foi preenchido, tentar novamente com todos os campos preenchidos',
+                        'senha' => 'Sua senha nao foi preenchida, tentar novamente com todos os campos preenchidos'
+                    }
+                ]);
+                return;
+            }
+        }
 
         $ch = curl_init(URL_API . 'add_cadastro');
 
@@ -22,10 +36,9 @@ class CadastroController extends Controller
             CURLOPT_POST => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Accept: application/json'
+                'Content-Type: application/json'
             ],
-            CURLOPT_POSTFIELDS => json_encode($input, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            CURLOPT_POSTFIELDS => json_encode($input),
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_SSL_VERIFYPEER => false
         ]);
@@ -34,17 +47,26 @@ class CadastroController extends Controller
 
         $erro = curl_error($ch);
 
-        $http = curl_getinfo($ch);
+        $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         curl_close($ch);
 
         if($erro){
-            echo json_encode([
-                'erro' => 'Erro ao enviar formulario'
-            ]);
+            die($erro);
+        }
+
+        if($http !== 201){
+            echo $resposta;
             return;
         }
 
-        echo $resposta;
+        $resposta = json_decode($resposta, true);
+
+        $_SESSION['login'] = $resposta['sucesso'];
+
+        echo json_encode([
+            'sucesso' => 'Cadastro realizado com sucesso'
+        ]);
+        return;
     }
 }

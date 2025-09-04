@@ -5,7 +5,7 @@ class Controller
     public function render(string $view, array $dados = []): void
     {
         extract($dados);
-
+        
         require_once("../app/views/$view.php");
     }
 

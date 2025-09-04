@@ -75,7 +75,7 @@
         <section class="contato">
             <div class="site">
                 <h2>Tem uma duvida?<span> Fale Conosco</span></h2>
-                <form action="" method="post">
+                <form action="" method="post" id="comentario">
                     <div class="nomeContato">
                         <label for="nomeContato">Nome:</label>
                         <input type="text" placeholder="Seu Nome Completo" value="<?= $dadosLogin['nome']?>" name="nomeContato" id="nomeContato" disabled>
@@ -97,6 +97,30 @@
                         <button type="submit">Enviar</button>
                     </div>
                 </form>
+
+                <!-- AJAX Comentario -->
+                 <script>
+                    document.getElementById('comentario').addEventListener('submit', function(e){
+                        e.preventDefault();
+
+                        const form = e.target;
+                        const input = new FormData(form);
+
+                        fetch(`<?= URL?>inicio/add_comentario`, {
+                            method: form.method,
+                            body: input
+                        })
+
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                        })
+
+                        .catch(error => {
+                            console.error(error);
+                        }) 
+                    });
+                 </script>
             </div>
         </section>
     </main>

@@ -49,34 +49,24 @@
         document.getElementById('formLogin').addEventListener('submit', function(e){
             e.preventDefault();
 
-            const input = {
-                'email':document.getElementById('emailLogin').value,
-                'senha':document.getElementById('senhaLogin').value
-            };
+            const form = e.target;
+            const input = new FormData(form);
 
-            fetch(`<?= URL?>login/verificar`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(input)
+            fetch(`<?= URL?>login/logar`, {
+                method: form.method,
+                body: input
             })
 
             .then(response => response.json())
             .then(data => {
-                if(!data.sucesso){
-                    alert(data);
-                } else{
-                    alert(data.sucesso);
-                    
-                    window.location.href = "<?= URL?>inicio";
-                }
+                console.log(data)
             })
 
             .catch(error => {
+                alert(error);
                 console.error(error);
             })
-        })
+        });
     </script>
 
     <script src="<?= URL?>assets/js/script.js"></script>

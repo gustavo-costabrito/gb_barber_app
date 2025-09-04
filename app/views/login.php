@@ -52,14 +52,18 @@
             const form = e.target;
             const input = new FormData(form);
 
-            fetch(`<?= URL?>login/logar`, {
+            fetch(`<?= URL?>login/logar_senha`, {
                 method: form.method,
                 body: input
             })
 
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                console.log(data)
+                if(data.includes("Token")){
+                    window.location.href = `<?= URL?>inicio`;
+                } else{
+                    console.log(data);
+                }
             })
 
             .catch(error => {

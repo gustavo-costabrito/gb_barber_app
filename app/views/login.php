@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_SESSION['login'])){
+    header('Location: ' . URL . 'inicio');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php require_once(__DIR__ . '/includes/head.php')?>
@@ -59,7 +68,7 @@
 
             .then(response => response.text())
             .then(data => {
-                if(data.includes("Token")){
+                if(data.includes("Sucesso")){
                     window.location.href = `<?= URL?>inicio`;
                 } else{
                     console.log(data);

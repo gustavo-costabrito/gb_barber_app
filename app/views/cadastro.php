@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_SESSION['login'])){
+    header('Location: ' . URL . 'inicio');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php require_once(__DIR__ . '/includes/head.php') ?>
@@ -46,41 +55,34 @@
     </section>
 
     <!-- AJAX -->
-     <script>
-        document.getElementById('formCadastro').addEventListener('submit', function(e){
+    <script>
+        document.getElementById('formCadastro').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const input = {
-                'nome': document.getElementById('nomeCadastro').value,
-                'email': document.getElementById('emailCadastro').value,
-                'whatsapp': document.getElementById('whatsappCadastro').value,
-                'senha': document.getElementById('senhaCadastro').value,
-            };
+            const form = e.target;
+            const input = new FormData(form);
 
-            fetch(`<?= URL?>cadastro/adicionar`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(input)
+            fetch(`<?= URL ?>cadastro/cadastrar`, {
+                method: form.method,
+                body: input
             })
 
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                if(data.sucesso){
-                    alert(data.sucesso);
-
-                    window.location.href = "<?= URL?>inicio";
+                if(data.includes("Sucesso")){
+                    window.location.href = `<?= URL?>inicio`;
                 } else{
-                    console.log(data);
+                    alert(data);
+                    console.error(data);
                 }
             })
 
             .catch(error => {
+                alert(error);
                 console.error(error);
             })
-        })
-     </script>
+        });
+    </script>
 
 
     <script src="<?= URL ?>assets/js/script.js"></script>

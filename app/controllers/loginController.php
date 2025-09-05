@@ -39,7 +39,7 @@ class LoginController extends Controller{
 
             $_SESSION['login'] = $login['sucesso'];
 
-            echo "Token";
+            echo "Sucesso";
         }
     }
 

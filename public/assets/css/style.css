@@ -53,7 +53,7 @@ html {
                 font-size: var(--font-principal);
                 gap: .5rem;
 
-                img{
+                img {
                     width: 2.5rem;
                     position: absolute;
                     margin-right: 22rem;
@@ -205,15 +205,24 @@ html {
                                 }
 
                                 button:nth-child(1) {
-                                    background-color: var(--cor-terciaria);
-                                    color: var(--cor-secundaria);
                                     border-radius: 5px 0 0 5px;
+                                    cursor: pointer;
                                 }
 
                                 button:nth-child(2) {
+                                    border-radius: 0 5px 5px 0;
+                                    cursor: pointer;
+                                }
+
+                                .ativo {
+                                    background-color: var(--cor-terciaria);
+                                    color: var(--cor-secundaria);
+
+                                }
+
+                                .inativo {
                                     background-color: var(--cor-secundaria);
                                     color: var(--cor-terciaria);
-                                    border-radius: 0 5px 5px 0;
                                 }
                             }
                         }
@@ -653,12 +662,12 @@ html {
             }
         }
 
-        .conteudoDetalhe{
+        .conteudoDetalhe {
             display: flex;
             flex-direction: column;
             gap: 5rem;
 
-            .servicoCombo{
+            .servicoCombo {
                 background-size: cover;
                 background-position: center;
                 color: var(--cor-secundaria);
@@ -671,7 +680,7 @@ html {
                 border: solid 2px var(--cor-terciaria);
                 border-radius: 20px;
 
-                .fundoServicoCombo{
+                .fundoServicoCombo {
                     position: absolute;
                     display: flex;
                     flex-direction: column;
@@ -684,22 +693,22 @@ html {
                 }
 
                 p,
-                .nomeValor{
+                .nomeValor {
                     z-index: 1;
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }
 
-                p{
+                p {
                     line-height: 1.5;
                 }
 
-                .nomeValor{
+                .nomeValor {
                     display: flex;
                     justify-content: space-between;
                 }
 
-                button{
+                button {
                     background-color: var(--cor-secundaria);
                     color: var(--cor-terciaria);
                     font-size: var(--font-terciaria);
@@ -712,7 +721,7 @@ html {
                 }
             }
 
-            >button{
+            >button {
                 height: var(--height-button);
                 background-color: var(--cor-terciaria);
                 color: var(--cor-secundaria);
@@ -728,28 +737,28 @@ html {
 
 
 /* Faça Agendamento */
-.agendamento{
+.agendamento {
     background-color: var(--cor-principal);
     min-height: 100vh;
 
-    .site{
+    .site {
         padding-top: 2rem;
 
-        .conteudoAgendamento{
+        .conteudoAgendamento {
             margin-top: 5rem;
 
-            form{
+            form {
                 display: flex;
                 flex-direction: column;
                 gap: 1.5rem;
 
-                >div{
+                >div {
                     display: flex;
                     flex-direction: column;
                     gap: .5rem;
 
                     input,
-                    select{
+                    select {
                         background-color: var(--cor-auxiliar);
                         color: var(--cor-secundaria);
                         height: var(--height-input);
@@ -760,32 +769,32 @@ html {
                         padding-left: 1rem;
                     }
 
-                    label{
+                    label {
                         color: var(--cor-secundaria);
                         font-size: var(--font-terciaria);
                     }
                 }
 
-                .servicoAgendamento{
+                .servicoAgendamento {
                     font-size: var(--font-secundaria);
                     gap: 4rem;
 
-                    h2{
+                    h2 {
                         text-align: center;
                         color: var(--cor-secundaria);
 
-                        span{
+                        span {
                             color: var(--cor-terciaria);
                         }
                     }
 
-                    .servicosCombos{
+                    .servicosCombos {
                         display: grid;
                         grid-template-columns: 45% 45%;
                         row-gap: 2rem;
                         justify-content: space-between;
 
-                        >div{
+                        >div {
                             background-size: cover;
                             background-position: center;
                             display: grid;
@@ -795,7 +804,7 @@ html {
                             border-radius: 20px;
                             border: solid 2px var(--cor-terciaria);
 
-                            .selecionar{
+                            .selecionar {
                                 background-color: var(--cor-secundaria);
                                 display: flex;
                                 justify-content: center;
@@ -805,7 +814,7 @@ html {
                                 border-radius: 50%;
                                 cursor: pointer;
 
-                                #selecionado{
+                                #selecionado {
                                     background-color: var(--cor-auxiliar);
                                     height: 2rem;
                                     width: 2rem;
@@ -813,7 +822,7 @@ html {
                                 }
                             }
 
-                            .nomeValorAgendamento{
+                            .nomeValorAgendamento {
                                 color: var(--cor-secundaria);
                                 display: flex;
                                 flex-direction: column;
@@ -822,7 +831,7 @@ html {
                                 padding-left: .5rem;
                                 padding-bottom: 1rem;
 
-                                h3{
+                                h3 {
                                     font-size: 1rem;
                                 }
                             }
@@ -830,7 +839,7 @@ html {
                     }
                 }
 
-                button{
+                button {
                     background-color: var(--cor-terciaria);
                     color: var(--cor-secundaria);
                     height: var(--height-button);
@@ -842,7 +851,7 @@ html {
                     transition: 0.3s all;
                 }
 
-                button:hover{
+                button:hover {
                     background-color: var(--cor-secundaria);
                     color: var(--cor-terciaria);
                 }

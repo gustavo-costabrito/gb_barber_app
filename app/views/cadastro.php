@@ -35,7 +35,7 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="__content__input">
                         <label for="whatsappCadastro">Whatsapp:</label>
-                        <input type="tel" placeholder="(00) 00000-0000" name="whatsappCadastro" id="whatsappCadastro">
+                        <input type="text" placeholder="(00) 00000-0000" name="whatsappCadastro" id="whatsappCadastro" maxlength="15">
                     </div>
                     <div class="__content__input">
                         <label for="senhaCadastro">Senha:</label>
@@ -53,6 +53,21 @@ if(isset($_SESSION['login'])){
 
         <div class="fundo-cadastro" style="background-image: url(<?= URL ?>assets/img/fundo-cadastro.jpg);"></div>
     </section>
+
+    <!-- Javacript -->
+     <script>
+        document.getElementById('whatsappCadastro').addEventListener('input', function(event){
+            let valor = event.target.value;
+
+            valor = valor.replace(/\D/g, '');
+
+            if(valor.lenght < 15){
+                event.target.value = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+            } else{
+                event.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            }
+        });
+     </script>
 
     <!-- AJAX -->
     <script>
@@ -83,9 +98,6 @@ if(isset($_SESSION['login'])){
             })
         });
     </script>
-
-
-    <script src="<?= URL ?>assets/js/script.js"></script>
 </body>
 
 </html>

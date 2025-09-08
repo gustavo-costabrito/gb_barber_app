@@ -2,21 +2,21 @@
     <div class="site">
         <nav>
             <ul>
-                <li id="inicio">
+                <li id="inicio" style="cursor: pointer;">
                     <img src="<?= URL ?>assets/img/casa.png" alt="">
                     <p>Inicio</p>
                 </li>
-                <li>
+                <li id="agendamento" style="cursor: pointer;">
                     <img src="<?= URL ?>assets/img/agenda.png" alt="">
                     <p>Agendamentos</p>
                 </li>
-                <li>
+                <li style="cursor: pointer;">
                     <img src="<?= URL ?>assets/img/perguntando.png" alt="">
                     <p>Perguntas</p>
                 </li>
-                <li>
+                <li style="cursor: pointer;">
                     <img src="<?= URL ?>assets/img/aplicativos.png" alt="">
-                    <p>Servicos</p>
+                    <p>Serviços</p>
                 </li>
             </ul>
         </nav>
@@ -27,4 +27,8 @@
     document.getElementById('inicio').addEventListener('click', function(){
         window.location.href = "<?= URL?>inicio";
     });
+
+    document.getElementById('agendamento').addEventListener('click', function(){
+        window.location.href = "<?= URL?>agendamento/meus_agendamentos"
+    })
 </script>

@@ -34,7 +34,7 @@
                 </h2>
                 <div class="banner__content">
                     <h3>Descubra o melhor serviço de barbearia na <span>GB BARBER</span></h3>
-                    <button type="button" id="fazerAgendamento">Fazer agendamento</button>
+                    <button type="button" id="fazerAgendamento" style="cursor: pointer">Fazer agendamento</button>
 
                     <script>
                         document.getElementById('fazerAgendamento').addEventListener('click', function(){

@@ -18,6 +18,24 @@ class AgendamentoController extends Controller
         $this->render('agendamento', $dados);
     }
 
+    public function meus_agendamentos(): void
+    {
+        $payload = Token::validar($_SESSION['login']);
+
+        if(is_null($payload)){
+            header('Location: ' . URL . 'login');
+            exit;
+        }
+
+
+        $dados = [];
+
+        $this->render('meuAgendamento', $dados);
+    }
+
+
+    // APIs
+
     private function data_agendamento(): ?array
     {
         $ch = curl_init(URL_API . 'listar_datas');

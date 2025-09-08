@@ -6,6 +6,10 @@ class Token
     {
         $tokenPartes = explode('.', $token, 3);
 
+        if(count($tokenPartes) !== 3){
+            return null;
+        }
+
         list($header, $payload, $signe) = $tokenPartes;
 
         $key = base64_decode($_ENV['CRYPTO_KEY']);

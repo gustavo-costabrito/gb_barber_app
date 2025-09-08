@@ -735,7 +735,6 @@ html {
 }
 
 
-
 /* Faça Agendamento */
 .agendamento {
     background-color: var(--cor-principal);
@@ -863,6 +862,18 @@ html {
 
 
 
+/* Meus Agendamentos */
+.meuAgendamento{
+    min-height: 78vh;
+
+    .site{
+        padding-top: 4rem;
+    }
+}
+
+
+
+
 /* Footer */
 footer {
     .site {
@@ -962,6 +973,8 @@ footer {
 
 
 
+
+
 /* Informações do Login */
 .info {
     background-color: var(--cor-principal);
@@ -1031,4 +1044,12 @@ footer {
 
 .button-info:hover{
     transform: scale(1.1);
+}
+
+
+
+
+/* Meu agendamento */
+.meuAgendamento{
+    background-color: var(--cor-principal);
 }

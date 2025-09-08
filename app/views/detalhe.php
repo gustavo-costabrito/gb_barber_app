@@ -11,15 +11,15 @@
         <section class="detalhe">
             <div class="site">
                 <div class="tituloTela">
-                    <img src="" alt="">
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
                     <h2>Saiba mais sobre esse <span>servico:</span></h2>
                 </div>
                 <div class="conteudoDetalhe">
-                    <div class="servicoCombo" style="background-image: url(<?= URL?>assets/img/<?= $imagem_combo ?? $imagem_servico?>);">
-                        <p><?= $descricao_combo ?? $descricao_servico?></p>
+                    <div class="servicoCombo" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico ?>);">
+                        <p><?= $descricao_combo ?? $descricao_servico ?></p>
                         <div class="nomeValor">
-                            <h2><?= $nome_combo ?? $nome_servico?></h2>
-                            <h3>R$<?= $valor_combo ?? $valor_servico?></h3>
+                            <h2><?= $nome_combo ?? $nome_servico ?></h2>
+                            <h3>R$<?= $valor_combo ?? $valor_servico ?></h3>
                         </div>
                         <button type="button">Agendar Servico</button>
                         <div class="fundoServicoCombo"></div>

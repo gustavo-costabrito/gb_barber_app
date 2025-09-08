@@ -105,11 +105,7 @@ if (isset($_SESSION['login'])) {
                 document.getElementById('whatsappLogin').addEventListener('input', function(event){
                     let valor = event.target.value;
 
-                    if(valor.length <= 10){
-                        event.target.value = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
-                    } else{
-                        event.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-                    }
+                    event.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
                 });
             }
         }

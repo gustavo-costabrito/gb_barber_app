@@ -894,3 +894,141 @@ footer {
         }
     }
 }
+
+
+
+/* Menu */
+.menu {
+    background-color: var(--cor-principal);
+    min-height: 73.5vh;
+}
+
+.conteiner-menu {
+    text-align: center;
+    margin: 0 auto;
+    justify-items: center;
+    display: grid;
+    padding: 100px 62px;
+}
+
+.box-menu {
+    width: 250px;
+    height: 60px;
+    background-color: #3f3f3f54;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    display: flex;
+    box-shadow: 0px 2px 3px #f1070759;
+    transition: all 0.5s ease-out;
+
+    h2 {
+        margin: 20px -5px;
+        color: white;
+        font-weight: 300;
+        width: 160px;
+    }
+
+    img {
+        width: 35px;
+        height: 35px;
+        padding: 12px 14px;
+    }
+}
+
+.box-menu:hover {
+    transform: scale(1.1);
+}
+
+.button-menu {
+    width: 140px;
+    height: 35px;
+    background-color: var(--cor-auxiliar);
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    transition: all 0.5s ease;
+    margin-top: 20px;
+    box-shadow: 0px 1px 10px #ff0000;
+}
+
+.button-menu:hover {
+    background-color: var(--cor-border);
+}
+
+.button-menu:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+/* Informações do Login */
+.info {
+    background-color: var(--cor-principal);
+}
+
+.tt-info {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.container-info {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+}
+
+.box-info {
+    display: grid;
+    grid-template-columns: auto;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.box-info label{
+    color: #BE4949;
+    font-size: var(--font-secundaria);
+    text-align: justify;
+    margin-bottom: 2px;
+    margin-top: 10px;
+}
+
+.box-info input {
+    border: none;
+    width: 300px;
+    height: 30px;
+    background-color: var(--cor-principal);
+    color: #FFFFFF;
+    font-size: var(--font-terciaria);
+    margin-top: 8px;
+}
+
+.box-info input:focus{
+    border: none;
+    outline: none;
+}
+
+.linha-input{
+    border-bottom: solid 1.5px var(--cor-terciaria);
+    background-color: var(--cor-principal);
+}
+
+.button-info{
+    background-color: #BE4949;
+    border-radius: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: var(--font-terciaria);
+    text-align: center;
+    border: none;
+    color: #FFFFFF;
+    transition: all 0.5s ease;
+    box-shadow: 0px 0px 5px #d4d4d4;
+    margin-top: 70px;
+}
+
+.button-info:hover{
+    transform: scale(1.1);
+}

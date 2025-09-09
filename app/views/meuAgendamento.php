@@ -9,7 +9,7 @@
         <section class="meuAgendamento">
             <div class="site">
                 <div class="tituloTela">
-                <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
                     <h2>Meus <span>agendamentos:</span></h2>
                 </div>
                 <div class="conteudoMeuAgendamento">
@@ -21,16 +21,18 @@
                             <p><span>Valor do agendamento: </span>R$60,00</p>
                             <button type="button">Cancelar</button>
                         </div>
-                        <div class="caixaAgendamento__status">
-                            <img src="" alt="">
-                            <span>Aguardando</span>
-                        </div>
-                        <div class="caixaAgendamento__servicoData">
-                            <div class="__servicoData__servico">
-                                <h3>Serviço:</h3>
-                                <p>Corte Rápido</p>
+                        <div class="caixaAgendamento__dadosServico">
+                            <div class="caixaAgendamento__status">
+                                <img src="" alt="">
+                                <span>Aguardando</span>
                             </div>
-                            <h3>03/08/2025, ás 10:30 até 12:00</h3>
+                            <div class="caixaAgendamento__servicoData">
+                                <div class="__servicoData__servico">
+                                    <h3>Serviço:</h3>
+                                    <p>Corte Rápido</p>
+                                </div>
+                                <h3>03/08/2025, ás 10:30 até 12:00</h3>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -87,6 +87,8 @@ class AgendamentoController extends Controller
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+        curl_close($ch);
+
         if($erro){
             return null;
         }

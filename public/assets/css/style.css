@@ -868,6 +868,56 @@ html {
 
     .site{
         padding-top: 4rem;
+        display: grid;
+        gap: 6rem;
+
+        .conteudoMeuAgendamento{
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+
+            .caixaAgendamento{
+                background-color: var(--cor-auxiliar);
+                display: grid;
+                grid-template-columns: 55% 45%;
+                align-content: center;
+                height: 18rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                border-radius: 20px;
+
+                .caixaAgendamento__dadosCliente {
+                    color: var(--cor-secundaria);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+
+                    h2{
+                        font-size: var(--font-secundaria);
+                    }
+
+                    h3{
+                        font-size: var(--font-terciaria);
+                    }
+
+                    p{
+                        span{
+                            color: var(--cor-terciaria);
+                        }
+                    }
+
+                    button{
+                        background-color: var(--cor-terciaria);
+                        color: var(--cor-secundaria);
+                        height: var(--height-button);
+                        font-size: var(--font-principal);
+                        border: none;
+                        outline: none;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
     }
 }
 

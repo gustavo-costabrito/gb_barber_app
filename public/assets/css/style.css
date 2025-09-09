@@ -1048,6 +1048,127 @@ footer {
 
 
 
+/* Perguntas */
+.container-perguntas {
+    width: 400px;
+    height: 250px;
+    background-color: var(--cor-auxiliar);
+    border-radius: 25px;
+}
+
+.info1-perguntas {
+    color: #fff;
+    width: 210px;
+    height: 90px;
+    padding: 0.8rem 0.8rem;
+}
+
+.info2-perguntas {
+    color: #fff;
+    width: 150px;
+    text-align: end;
+    padding: 1rem 0rem;
+    font-size: var(--font-terciaria);
+}
+
+.info3-perguntas {
+    color: #fff;
+    font-size: var(--font-terciaria);
+}
+
+.info3-perguntas h2 {
+    padding: 0rem 1rem;
+}
+
+.nome-perguntas {
+    font-size: var(--font-principal);
+    color: var(--cor-terciaria);
+}
+
+.gmail-perguntas {
+    font-size: var(--font-secundaria);
+}
+
+.telefone-perguntas {
+    font-size: var(--font-terciaria);
+    line-height: 30px;
+}
+
+.tudo-info1 {
+    display: flex;
+}
+
+.exibir-perguntas {
+    background-color: #fff;
+    border: none;
+    border-radius: 7px;
+    width: 150px;
+    height: 40px;
+    font-size: 1.1rem;
+    color: var(--cor-terciaria);
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.exibir-resposta {
+    display: none;
+    color: #fff;
+    margin-top: 10px;
+    padding: 10px;
+    background: var(--cor-auxiliar);
+    border-radius: 5px;
+}
+
+
+
+
+/* Serviços */
+.servicos-todos {
+    background-color: var(--cor-principal);
+
+}
+
+.box-detalhe-servico {
+    height: 260px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 25px;
+}
+
+.container-todos-servicos {
+    width: 395px;
+    height: 260px;
+    border: solid 2px var(--cor-terciaria);
+    border-radius: 25px;
+    margin-top: 50px;
+}
+
+.box-detalhe-servico h2 {
+    font-size: var(--font-principal);
+    color: #fff;
+    font-weight: 400;
+    padding: 1.2rem 1.5rem;
+}
+
+.box-detalhe-servico p{
+    color: #fff;
+    font-size: var(--font-terciaria);
+    padding: 0.7rem 1.5rem;
+}
+
+.button-todos-servicos{
+    margin-left: 275px;
+    margin-top: 30px;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    color: var(--cor-terciaria);
+    font-size: var(--font-terciaria);
+}
+
+
+
 
 /* Meu agendamento */
 .meuAgendamento{

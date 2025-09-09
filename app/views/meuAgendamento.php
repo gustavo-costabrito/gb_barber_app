@@ -23,7 +23,14 @@
                         </div>
                         <div class="caixaAgendamento__status">
                             <img src="" alt="">
-                            <span></span>
+                            <span>Aguardando</span>
+                        </div>
+                        <div class="caixaAgendamento__servicoData">
+                            <div class="__servicoData__servico">
+                                <h3>Serviço:</h3>
+                                <p>Corte Rápido</p>
+                            </div>
+                            <h3>03/08/2025, ás 10:30 até 12:00</h3>
                         </div>
                     </div>
                 </div>

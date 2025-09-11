@@ -13,6 +13,28 @@
                     <h2>Meus <span>agendamentos:</span></h2>
                 </div>
                 <div class="conteudoMeuAgendamento">
+                    <div class="caixaAgendamento concluido">
+                        <div class="caixaAgendamento__dadosCliente">
+                            <h2>Gustavo Costa Brito</h2>
+                            <h3>gustavo@email.com</h3>
+                            <h3>(11) 91295-4343</h3>
+                            <p><span>Valor do agendamento: </span>R$60,00</p>
+                            <button type="button">Cancelar</button>
+                        </div>
+                        <div class="caixaAgendamento__dadosServico">
+                            <div class="caixaAgendamento__status">
+                                <img src="" alt="">
+                                <span>Realizado</span>
+                            </div>
+                            <div class="caixaAgendamento__servicoData">
+                                <div class="__servicoData__servico">
+                                    <h3>Serviço agendado:</h3>
+                                    <p>Corte Rápido + Sobrancelha + Barba - R$20,00</p>
+                                </div>
+                                <h3>03/08/2025, ás 10:30 até 12:00</h3>
+                            </div>
+                        </div>
+                    </div>
                     <div class="caixaAgendamento">
                         <div class="caixaAgendamento__dadosCliente">
                             <h2>Gustavo Costa Brito</h2>
@@ -28,8 +50,8 @@
                             </div>
                             <div class="caixaAgendamento__servicoData">
                                 <div class="__servicoData__servico">
-                                    <h3>Serviço:</h3>
-                                    <p>Corte Rápido</p>
+                                    <h3>Serviço agendado:</h3>
+                                    <p>Corte Rápido + Sobrancelha + Barba - R$20,00</p>
                                 </div>
                                 <h3>03/08/2025, ás 10:30 até 12:00</h3>
                             </div>

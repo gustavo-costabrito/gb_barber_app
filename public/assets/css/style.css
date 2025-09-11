@@ -868,19 +868,23 @@ html {
 
     .site{
         padding-top: 4rem;
+        padding-bottom: 4rem;
         display: grid;
         gap: 6rem;
 
         .conteudoMeuAgendamento{
             display: flex;
             flex-direction: column;
-            gap: 5rem;
+            gap: 2rem;
 
             .caixaAgendamento{
                 background-color: var(--cor-auxiliar);
                 display: grid;
                 grid-template-columns: 55% 45%;
                 align-content: center;
+                box-sizing: border-box;
+                border-bottom: solid 3px rgb(250, 250, 0);
+                box-shadow: 0 5px 20px -10px yellow;
                 height: 18rem;
                 padding-left: 1rem;
                 padding-right: 1rem;
@@ -890,10 +894,10 @@ html {
                     color: var(--cor-secundaria);
                     display: flex;
                     flex-direction: column;
-                    gap: 1.5rem;
+                    gap: 1.1rem;
 
                     h2{
-                        font-size: var(--font-secundaria);
+                        font-size: 1.6rem;
                     }
 
                     h3{
@@ -910,11 +914,70 @@ html {
                         background-color: var(--cor-terciaria);
                         color: var(--cor-secundaria);
                         height: var(--height-button);
-                        font-size: var(--font-principal);
+                        width: 60%;
+                        font-size: var(--font-secundaria);
                         border: none;
                         outline: none;
                         border-radius: 10px;
                     }
+                }
+
+                .caixaAgendamento__dadosServico{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    
+                    .caixaAgendamento__status{
+                        display: flex;
+                        justify-content: space-between;
+
+                        span{
+                            background-color: rgba(250, 250, 0, 0.358);
+                            color: var(--cor-secundaria);
+                            padding: .5rem .8rem;
+                            border-radius: 20px;
+                        }
+                    }
+
+                    .caixaAgendamento__servicoData{
+                        color: var(--cor-secundaria);
+
+                        >div{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1rem;
+                            margin-bottom: 3rem;
+
+                            h3{
+                                color: var(--cor-terciaria);
+                                font-size: var(--font-secundaria);
+                                text-align: end;
+                            }
+
+                            p{
+                                text-align: center;
+                            }
+                        }
+
+                        h3{
+                            font-size: .9rem;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+
+            .concluido{
+                box-sizing: border-box;
+                border-bottom: solid 3px rgb(0, 250, 0);
+                box-shadow: 0 5px 20px -10px rgb(17, 255, 0);
+
+                .caixaAgendamento__dadosServico{
+                   .caixaAgendamento__status{
+                       span{
+                           background-color: rgba(0, 255, 0, 0.324);
+                       }
+                   } 
                 }
             }
         }

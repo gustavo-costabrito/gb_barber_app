@@ -10,9 +10,8 @@
     <main>
         <section class="detalhe">
             <div class="site">
-            <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
                 <div class="tituloTela">
-                    
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
                     <h2>Saiba mais sobre esse <span>servico:</span></h2>
                 </div>
                 <div class="conteudoDetalhe">

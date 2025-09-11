@@ -7,4 +7,11 @@ class MenuController extends Controller{
 
         $this->render('menu', $dados);
     }
+
+    public function logout(): void
+    {
+        session_unset();
+        header('Location: ' . URL . 'login');
+        exit;
+    }
 }

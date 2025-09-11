@@ -6,7 +6,7 @@
     <header class="yes-login">
         <div class="site">
             <h2>GB-Barbearia</h2>
-            <a href="<?= URL ?>inicio/index"><img src="<?= URL ?>assets/img/fechar.png" alt="Botão de voltar para página anterior"></a>
+            <img src="<?= URL ?>assets/img/fechar.png" alt="Botão de voltar para página anterior" id="fechar">
         </div>
     </header>
 
@@ -33,14 +33,20 @@
                     <h2>Minhas notificações</h2>
                 </div>
 
-            
-                    <button class="button-menu" >
-                        <img style="width: 25px; height: 25px; padding: 2px 5px;" src="<?= URL ?>assets/img/logout.png" alt="">
-                        <a class="link-button-menu" style="color: #FFFFFF;text-decoration: none;line-height: 33px;padding: 1px 9px;" href="<?= URL ?>menu/deslogar">Sair da Conta</a>
-                    </button>
+
+                <button class="button-menu">
+                    <img style="width: 25px; height: 25px; padding: 2px 5px;" src="<?= URL ?>assets/img/logout.png" alt="">
+                    <a class="link-button-menu" style="color: #FFFFFF;text-decoration: none;line-height: 33px;padding: 1px 9px;" href="<?= URL ?>menu/logout">Sair da Conta</a>
+                </button>
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('fechar').addEventListener('click', function(){
+            history.back();
+        });
+    </script>
 
     <?php require_once(__DIR__ . '/includes/footer.php') ?>
 </body>

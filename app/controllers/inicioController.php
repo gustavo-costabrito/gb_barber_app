@@ -2,13 +2,8 @@
 
 class InicioController extends Controller
 {
-    public function index()
+    public function index(): void
     {
-        if(!isset($_SESSION['login'])){
-            header('Location: ' . URL . 'login');
-            exit;
-        }
-
         $dados = [];
 
         $dados = [

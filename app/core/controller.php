@@ -84,4 +84,16 @@ class Controller
 
         return $textoUrl;
     }
+
+    public static function verificar_login(): void
+    {
+        $token = $_SESSION['login'] ?? '';
+
+        $payload = Token::validar($token);
+
+        if(is_null($payload)){
+            header('Location: ' . URL . 'login');
+            exit;
+        }
+    }
 }

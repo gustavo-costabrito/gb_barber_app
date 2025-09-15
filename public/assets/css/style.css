@@ -803,22 +803,8 @@ html {
                             border-radius: 20px;
                             border: solid 2px var(--cor-terciaria);
 
-                            .selecionar {
-                                background-color: var(--cor-secundaria);
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                height: 3rem;
-                                width: 3rem;
-                                border-radius: 50%;
-                                cursor: pointer;
-
-                                #selecionado {
-                                    background-color: var(--cor-auxiliar);
-                                    height: 2rem;
-                                    width: 2rem;
-                                    border-radius: 50%;
-                                }
+                            .selecionar{
+                                accent-color: var(--cor-terciaria);
                             }
 
                             .nomeValorAgendamento {

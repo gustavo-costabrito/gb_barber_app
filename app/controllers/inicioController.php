@@ -6,8 +6,6 @@ class InicioController extends Controller
     {
         $dados = [];
 
-        Controller::verificar_login();
-
         $dados = [
             'servicos' => $this->listar_servicos(),
             'dadosLogin' => $this->listar_login()

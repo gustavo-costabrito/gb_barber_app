@@ -120,6 +120,7 @@
                         .then(response => response.text())
                         .then(data => {
                             alert(data);
+                            window.location.href = "<?= URL?>perguntas";
                         })
 
                         .catch(error => {

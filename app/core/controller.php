@@ -96,4 +96,26 @@ class Controller
             exit;
         }
     }
+
+    public static function descriptografia(string $crypto): string|bool
+    {
+        $bytes = base64_decode($crypto);
+
+        $iv = substr($bytes, 0, openssl_cipher_iv_length(METHOD_CRYPTO));
+
+        $tag = substr($bytes, strlen($iv), 16);
+
+        $crypto = substr($bytes, (strlen($iv) + strlen($tag)));
+
+        $key = base64_decode($_ENV['CRYPTO_KEY']);
+
+        $normal = openssl_decrypt($crypto, METHOD_CRYPTO, $key, OPENSSL_RAW_DATA, $iv, $tag);
+
+        if(!$normal){
+            return false;
+        } else{
+            return $normal;
+        }
+    }
+
 }

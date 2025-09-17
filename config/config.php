@@ -6,6 +6,9 @@ define('URL_API', 'https://localhost/gb_barber/public/api/');
 
 define('URL_UPLOAD', 'https://localhost/gb_barber_app/public/uploads/');
 
+define('METHOD_CRYPTO', 'AES-256-GCM');
+
+
 spl_autoload_register(function($class){
     $caminhos = [
         "../app/controllers/$class.php",
@@ -25,11 +28,11 @@ function env(): void
     $arquivo = file("../.env", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
     foreach($arquivo as $valor){
-        if(strpos($valor, '#') === 0){
+        if(str_contains($valor, '#') && strpos($valor, '#') === 0){
             continue;
         }
 
-        $env = explode('=', $valor);
+        $env = explode('=', $valor, 2);
 
         $_ENV[$env[0]] = $env[1];
     }

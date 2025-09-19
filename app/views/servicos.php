@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <?php require_once('includes/head.php') ?>
 
 <body>
@@ -11,15 +11,17 @@
             <div>
                 <h2 style="color: #fff; text-align: center;font-size: var(--font-principal);">Todos os nossos <span style="color: #BE4949;">servicos</span></h2>
             </div>
-            <div class="container-todos-servicos">
-                <div class="box-detalhe-servico" style="background-image: url(<?= URL ?>assets/img/barba.jpg);">
-                    <h2>Corte Rápido</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur is pariatur eaque ullam quidem eligendi tempore deleniti amet fugit qui id.</p>
-                    <button class="button-todos-servicos">Ver detalhe</button>
 
-
+            <?php foreach ($servicos as $atributos) : ?>
+                <?php extract($atributos)?>
+                <div class="container-todos-servicos">
+                    <div class="box-detalhe-servico" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico?>);">
+                        <h2><?= $nome_combo ?? $nome_servico?></h2>
+                        <p><?= $descricao_combo ?? $descricao_servico?></p>
+                        <button type="button" class="button-todos-servicos" id="detalheServico" data-id="<?= $id_combo + 3 ?? $id_servico?>">Ver detalhe</button>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach?>
         </div>
     </section>
 
@@ -29,6 +31,7 @@
             window.location.href = "<?= URL ?>menu";
         });
     </script>
+
     <?php require_once('includes/footer.php') ?>
 
 </body>

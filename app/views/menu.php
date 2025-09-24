@@ -13,22 +13,22 @@
     <section id="hidden" class="menu">
         <div class="site">
             <div class="conteiner-menu">
-                <div class="box-menu">
+                <div class="box-menu" data-url="info">
                     <img src="<?= URL ?>assets/img/perfil.png" alt="">
                     <h2>Informações privativas</h2>
                 </div>
 
-                <div class="box-menu">
+                <div class="box-menu" data-url="agendamento/meus_agendamentos">
                     <img src="<?= URL ?>assets/img/calendario.png" alt="">
                     <h2>Meus agendamentos</h2>
                 </div>
 
-                <div class="box-menu">
+                <div class="box-menu" data-url="perguntas">
                     <img src="<?= URL ?>assets/img/perguntas.png" alt="">
                     <h2>Minhas perguntas</h2>
                 </div>
 
-                <div class="box-menu">
+                <div class="box-menu" data-url="notificacao">
                     <img src="<?= URL ?>assets/img/notificacao.png" alt="">
                     <h2>Minhas notificações</h2>
                 </div>
@@ -45,6 +45,20 @@
     <script>
         document.getElementById('fechar').addEventListener('click', function(){
             history.back();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const menu = document.querySelectorAll('.box-menu');
+
+            menu.forEach((valor) => {
+                valor.addEventListener('click', function(){
+                    const url = this.dataset.url;
+
+                    window.location.href = `<?= URL?>${url}`;
+                });
+            });
         });
     </script>
 

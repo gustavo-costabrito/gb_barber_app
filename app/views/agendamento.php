@@ -13,7 +13,7 @@
                     <h2>Faça seu <span>agendamento:</span></h2>
                 </div>
                 <div class="conteudoAgendamento">
-                    <form action="" method="post" id="formAgendamento">
+                    <form action="" method="post" id="form_agendamento">
                         <div class="nomeAgendamento">
                             <label for="nomeAgendamento">Nome:</label>
                             <input type="text" name="nomeAgendamento" value="<?= $dadosLogin['nome'] ?>" placeholder="Seu Nome Completo" id="nomeAgendamento" disabled>
@@ -92,12 +92,13 @@
                     } else {
                         let horario = document.getElementById('horarioAgendamento');
 
-                        horario.innerHTML += data;
+                        horario.innerHTML = data;
                     }
 
                 })
 
                 .catch(error => {
+                    alert(error);
                     console.error(error);
                 })
         });
@@ -105,7 +106,7 @@
 
 
     <script>
-        document.getElementById('formAgendamento').addEventListener('submit', function(event){
+        document.getElementById('form_agendamento').addEventListener('submit', function(event){
             event.preventDefault();
 
             const form = new FormData(event.target);
@@ -115,9 +116,15 @@
                 body: form
             })
 
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                alert(data);
+                if(data.error){
+                    alert(data.error);
+                    console.log(data);
+                } else {
+                    alert(data.sucesso);
+                    console.log(data);
+                }
             })
 
             .catch(error => {

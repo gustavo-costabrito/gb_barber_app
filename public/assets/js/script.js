@@ -1,6 +1,18 @@
-document.getElementById('voltar').addEventListener('click', function(){
-    history.back();
+document.addEventListener('DOMContentLoaded', function(){
+    const limparForm = document.getElementById('limparForm');
+    const mensagem = document.getElementById('mensagemContato');
+
+    limparForm.addEventListener('click', function() {
+        mensagem.value = "";
+    });
 });
+
+document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('voltar').addEventListener('click', function(){
+        history.back();
+    });
+});
+
 
 document.getElementById('dataAgendamento').addEventListener('change', function(){
     const valor = parseInt(this.value);

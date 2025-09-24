@@ -6,16 +6,14 @@ class AgendamentoController extends Controller
     {
         $dados = [];
 
-        Controller::verificar_login();
-
         $dados = [
             'datas' => $this->data_agendamento(),
             'servicos' => $this->listar_servicos(),
             'dadosLogin' => $this->listar_login()
         ];
 
-        foreach($dados as $campo => $valor){
-            if(is_null($valor)){
+        foreach ($dados as $campo => $valor) {
+            if (is_null($valor)) {
                 die("Erro na API de $campo");
             }
         }
@@ -25,27 +23,66 @@ class AgendamentoController extends Controller
 
     public function adicionar_agendamento(): void
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            header('Content-Type: application/json');
+
             $input = [
-                'servico' => filter_input(INPUT_POST, 'servico', FILTER_SANITIZE_NUMBER_INT),
-                'data_horario' => filter_input(INPUT_POST, 'horarioAgendamento', FILTER_SANITIZE_NUMBER_INT)
+                'data_horario' => $_POST['dataAgendamento'] ?? null,
+                'servico' => $_POST['servico'] ?? null
             ];
 
-            foreach($input as $valor){
-                if(empty(trim($valor))){
-                    echo "Preencha todos os campos";
+            foreach ($input as $campo => $valor) {
+                if (is_null($valor) || empty(trim($valor)) || (int)$valor < 1) {
+                    http_response_code(422);
+                    echo json_encode([
+                        'error' => 'Preencher todos os campos'
+                    ], JSON_UNESCAPED_SLASHES |  JSON_UNESCAPED_UNICODE);
                     return;
                 }
             }
 
-            $resposta = $this->add_agendamento($input);
+            $validado['data_horario'] = (int)$input['data_horario'];
 
-            if(is_null($resposta)){
-                echo "Erro ao executar API";
+            if ((int)$input['servico'] > 3) {
+                $validado['combo'] = (int)$input['servico'] - 3;
+            } else {
+                $validado['servico'] = (int)$input['servico'];
+            }
+
+            $payload = Token::validar($_SESSION['login']);
+
+            if (is_null($payload)) {
+                http_response_code(400);
+                echo json_encode([
+                    'error' => 'Token expirado'
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                 return;
             }
 
-            echo $resposta['erro'] ?? $resposta['sucesso'];
+            $cliente = (int)$payload['id'];
+
+            $apiAgendamento = $this->add_agendamento($validado, $cliente);
+            
+            if (is_null($apiAgendamento)) {
+                echo json_encode([
+                    'error' => 'Erro ao adicionar agendamento'
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                return;
+            }
+
+            if (!isset($apiAgendamento['sucesso'])) {
+                http_response_code(400);
+                echo json_encode([
+                    'error' => $apiAgendamento['erro']
+                ]);
+                return;
+            }
+
+            http_response_code(200);
+            echo json_encode([
+                'sucess' => $apiAgendamento['sucesso']
+            ]);
             return;
         }
     }
@@ -57,7 +94,7 @@ class AgendamentoController extends Controller
     {
         $payload = Token::validar($_SESSION['login']);
 
-        if(is_null($payload)){
+        if (is_null($payload)) {
             header('Location: ' . URL . 'login');
             exit;
         }
@@ -94,11 +131,11 @@ class AgendamentoController extends Controller
 
         curl_close($ch);
 
-        if($erro){
+        if ($erro) {
             return null;
         }
 
-        if((int)$http !== 200){
+        if ((int)$http !== 200) {
             return json_decode($resposta, true);
         }
 
@@ -126,11 +163,11 @@ class AgendamentoController extends Controller
 
         curl_close($ch);
 
-        if($erro){
+        if ($erro) {
             return null;
         }
 
-        if($http != 200){
+        if ($http != 200) {
             return json_decode($resposta, true);
         }
 
@@ -141,7 +178,7 @@ class AgendamentoController extends Controller
     {
         $payload = Token::validar($_SESSION['login']);
 
-        if(is_null($payload)){
+        if (is_null($payload)) {
             return null;
         }
 
@@ -163,7 +200,7 @@ class AgendamentoController extends Controller
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if($erro){
+        if ($erro) {
             return null;
         }
 
@@ -172,15 +209,15 @@ class AgendamentoController extends Controller
         return $resposta;
     }
 
-    private function add_agendamento(array $input): ?array
+    private function add_agendamento(array $input, $cliente): ?array
     {
-        $payload = Token::validar($_SESSION['login']);
-
-        if(is_null($payload)){
-            return null;
+        foreach ($input as $valor) {
+            if (empty(trim($valor)) || is_null($valor) || !$valor) {
+                return null;
+            }
         }
 
-        $ch = curl_init(URL_API . 'add_agendamento/' . (int)$payload['id']);
+        $ch = curl_init(URL_API . 'add_agendamento/' . $cliente);
 
         curl_setopt_array($ch, [
             CURLOPT_POST => true,
@@ -197,19 +234,20 @@ class AgendamentoController extends Controller
 
         $resposta = curl_exec($ch);
 
+
         $erro = curl_error($ch);
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         curl_close($ch);
 
-        if($erro){
+        if ($erro) {
             return null;
         }
 
         $resposta = json_decode($resposta, true);
 
-        return $resposta;
+        return $resposta ?: null;
     }
 
     public function listar_horarios_data(int $id_data): void
@@ -233,19 +271,19 @@ class AgendamentoController extends Controller
 
         curl_close($ch);
 
-        if($erro){
+        if ($erro) {
             echo "Erro";
             return;
         }
 
         $resposta = json_decode($resposta, true);
 
-        if($http !== 200){
+        if ($http !== 200) {
             echo "Erro";
             return;
         }
 
-        foreach($resposta as $atributos){
+        foreach ($resposta as $atributos) {
             echo "<option value=\"$atributos[id_data_horario]\" id=\"horarioPadrao\">$atributos[hora_inicio]</option>";
         }
         return;

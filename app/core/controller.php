@@ -5,6 +5,10 @@ class Controller
     public function render(string $view, array $dados = []): void
     {
         extract($dados);
+
+        if($view !== 'login' && $view !== 'cadastro'){
+            self::verificar_login();
+        }
         
         require_once("../app/views/$view.php");
     }
@@ -85,16 +89,25 @@ class Controller
         return $textoUrl;
     }
 
-    public static function verificar_login(): void
+    private static function verificar_login(): void
     {
-        $token = $_SESSION['login'] ?? '';
+        $login = $_SESSION['login'] ?? null;
 
-        $payload = Token::validar($token);
-
-        if(is_null($payload)){
+        if(empty(trim($login)) || is_null($login)){
+            session_unset();
             header('Location: ' . URL . 'login');
             exit;
         }
+
+        $token = Token::validar($login);
+
+        if(is_null($token)){
+            session_unset();
+            header('Location: ' . URL . 'login');
+            exit;
+        }
+
+        return;
     }
 
     public static function descriptografia(string $crypto): string|bool

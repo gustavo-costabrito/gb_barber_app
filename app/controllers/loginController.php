@@ -4,6 +4,11 @@ class LoginController extends Controller
 {
     public function index(): void
     {
+        if(isset($_SESSION['login'])){
+            header('Location: ' . URL . 'inicio');
+            exit;
+        }
+
         $dados = [];
 
         $this->render('login', $dados);

@@ -15,7 +15,7 @@
                     <h2>Saiba mais sobre esse <span>servico:</span></h2>
                 </div>
                 <div class="conteudoDetalhe">
-                    <div class="servicoCombo" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico ?>);">
+                    <div class="servicoCombo" style="background-image: url(<?= URL_UPLOAD?><?= $imagem_combo ?? $imagem_servico?>);">
                         <p><?= $descricao_combo ?? $descricao_servico ?></p>
                         <div class="nomeValor">
                             <h2><?= $nome_combo ?? $nome_servico ?></h2>
@@ -24,13 +24,20 @@
                         <button type="button">Agendar Servico</button>
                         <div class="fundoServicoCombo"></div>
                     </div>
-                    <button type="button">Veja mais</button>
+                    <button type="button" id="veja-mais">Veja mais</button>
                 </div>
             </div>
         </section>
     </main>
 
     <?php require_once(__DIR__ . '/includes/footer.php') ?>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.getElementById('veja-mais').addEventListener('click', function(){
+            window.location.href = `<?= URL?>servicos`;
+        });
+    </script>
 
     <script src="<?= URL ?>assets/js/script.js"></script>
 </body>

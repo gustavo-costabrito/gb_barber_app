@@ -4,7 +4,7 @@ define('URL', 'https://localhost/gb_barber_app/public/');
 
 define('URL_API', 'https://localhost/gb_barber/public/api/');
 
-define('URL_UPLOAD', 'https://localhost/gb_barber_app/public/uploads/');
+define('URL_UPLOAD', 'https://localhost/gb_barber/public/upload/');
 
 define('METHOD_CRYPTO', 'AES-256-GCM');
 

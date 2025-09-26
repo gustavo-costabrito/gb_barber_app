@@ -13,7 +13,7 @@ class InicioController extends Controller
 
         foreach($dados as $campo => $valor){
             if(is_null($valor)){
-                die("Erro ao retornar a API $campo");
+                echo "erro api";
             }
         }
 
@@ -85,7 +85,7 @@ class InicioController extends Controller
 
     private function listar_login(): ?array
     {
-        $payload = Token::validar($_SESSION['login']);
+        $payload = Token::validar($_SESSION['login'] ?? '');
 
         if(is_null($payload)){
             return null;

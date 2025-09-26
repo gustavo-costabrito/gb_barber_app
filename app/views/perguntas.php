@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <?php require_once('includes/head.php') ?>
 
 <body>
@@ -9,17 +9,16 @@
         <div class="site">
             <h2 style="color: #fff; font-size: var(--font-principal); text-align: center;padding: 3rem 1rem;">Minhas <span style="color: var(--cor-terciaria);">Perguntas</span></h2>
 
-            <?php if (!isset($resposta['erro'])) :?>
-
+            <?php if (!isset($nenhum)) :?>
                 <?php foreach ($perguntas as $atributos) : ?>
                     <?php extract($atributos)?>
                     <div class="container-perguntas">
                         <div class="tudo-info1" style="display: flex;">
                             <div class="info1-perguntas">
                                 <ul>
-                                    <li class="nome-perguntas"><?= $nome_cliente ?></li>
+                                    <li class="nome-perguntas"><?= $nome_cliente?></li>
                                     <li class="gmail-perguntas"><?= Controller::descriptografia($email_cliente)?></li>
-                                    <li class="telefone-perguntas"><?= Controller::descriptografia($whatsapp_cliente)?></li>
+                                    <li class="telefone-perguntas"><?= Controller::descriptografia($email_cliente)?></li>
                                 </ul>
                             </div>
                             <div class="info2-perguntas">

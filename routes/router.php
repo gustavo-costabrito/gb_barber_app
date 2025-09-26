@@ -2,44 +2,31 @@
 
 class Router
 {
-    public static function routes()
+    public static function routes(): void
     {
-        $url = $_GET['url'];
+        $url = trim($_GET['url']);
 
-        if (empty($url)) {
-            header('Location:' . URL . 'inicio');
+        if(empty($url)){
+            header('Location: ' . URL . 'inicio');
             exit;
         }
 
         $url = explode('/', $url);
 
-        foreach ($url as $posicao => $valor) {
-            switch ($posicao) {
-                case 0:
-                    $controller = ucfirst($valor) . 'Controller';
-                    break;
-
-                case 1:
-                    $method = $valor;
-                    break;
-
-                default:
-                    $param[] = $valor;
-                    break;
-            }
+        foreach($url as $posicao => $valor){
+            match($posicao){
+                0 => $controller = ucfirst($valor) . 'Controller',
+                1 => $method = strtolower($valor),
+                default => $param[] = $valor
+            };
         }
 
-        if(!isset($method)){
+        if(!isset($method) || empty(trim($method))){
             $method = 'index';
         }
 
         if(!isset($param)){
             $param[] = '';
-        }
-
-        if(!class_exists($controller) || !method_exists($controller, $method)){
-            header('Location: '.URL.'inicio');
-            exit;
         }
 
         call_user_func_array([new $controller(), $method], $param);

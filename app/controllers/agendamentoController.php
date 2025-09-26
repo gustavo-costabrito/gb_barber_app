@@ -28,7 +28,7 @@ class AgendamentoController extends Controller
             header('Content-Type: application/json');
 
             $input = [
-                'data_horario' => $_POST['dataAgendamento'] ?? null,
+                'data_horario' => $_POST['horarioAgendamento'] ?? null,
                 'servico' => $_POST['servico'] ?? null
             ];
 
@@ -44,11 +44,7 @@ class AgendamentoController extends Controller
 
             $validado['data_horario'] = (int)$input['data_horario'];
 
-            if ((int)$input['servico'] > 3) {
-                $validado['combo'] = (int)$input['servico'] - 3;
-            } else {
-                $validado['servico'] = (int)$input['servico'];
-            }
+            $validado['servico'] = (int)$input['servico'];
 
             $payload = Token::validar($_SESSION['login']);
 

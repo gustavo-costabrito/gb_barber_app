@@ -30,7 +30,7 @@
                             <h2>Selecione um serviço para o seu <span>agendamento:</span></h2>
                             <div class="servicosCombos">
                                 <?php foreach ($servicos as $atributos) : ?>
-                                    <div class="servicoCombo1" style="background-image: url(<?= URL ?>assets/img/<?= $atributos['imagem_servico'] ?? $atributos['imagem_combo'] ?>);">
+                                    <div class="servicoCombo1" style="background-image: url(<?= URL_UPLOAD?><?= $atributos['imagem_combo'] ?? $atributos['imagem_servico']?>);">
                                         <div class="nomeValorAgendamento">
                                             <h3><?= $atributos['nome_servico'] ?? $atributos['nome_combo'] ?></h3>
                                             <h4>R$<?= $atributos['valor_servico'] ?? $atributos['valor_combo'] ?></h4>

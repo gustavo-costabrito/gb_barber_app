@@ -1,12 +1,3 @@
-<?php
-
-if (isset($_SESSION['login'])) {
-    header('Location: ' . URL . 'inicio');
-    exit;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php require_once(__DIR__ . '/includes/head.php') ?>

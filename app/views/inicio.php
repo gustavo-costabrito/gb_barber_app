@@ -58,7 +58,7 @@
             <div class="site">
                 <?php foreach ($servicos as $atributo) : ?>
                     <?php extract($atributo) ?>
-                    <div class="servico" data-name="<?= Controller::tratar_url($nome_combo ?? $nome_servico)?>" style="background-image: url(<?= URL ?>assets/img/<?= $imagem_combo ?? $imagem_servico ?>);">
+                    <div class="servico" data-name="<?= Controller::tratar_url($nome_combo ?? $nome_servico)?>" style="background-image: url(<?= URL_UPLOAD?><?= $imagem_combo ?? $imagem_servico?>);">
                         <div class="texto-servico">
                             <h2><?= $nome_combo ?? $nome_servico ?></h2>
                             <h3>R$<?= $valor_combo ?? $valor_servico ?></h3>

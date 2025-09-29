@@ -12,12 +12,6 @@ class AgendamentoController extends Controller
             'dadosLogin' => $this->listar_login()
         ];
 
-        foreach ($dados as $campo => $valor) {
-            if (is_null($valor)) {
-                die("Erro na API de $campo");
-            }
-        }
-
         $this->render('agendamento', $dados);
     }
 

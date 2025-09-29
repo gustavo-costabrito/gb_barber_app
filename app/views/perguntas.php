@@ -69,11 +69,6 @@
         });
     </script>
 
-    <script>
-        document.getElementById("inicio").addEventListener("click", () => {
-            window.location.href = "<?= URL ?>menu";
-        });
-    </script>
     <?php require_once('includes/footer.php') ?>
 </body>
 

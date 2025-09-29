@@ -2,7 +2,7 @@
     <div class="site">
         <nav>
             <ul>
-                <li id="inicio" style="cursor: pointer;">
+                <li id="home" style="cursor: pointer;">
                     <img src="<?= URL ?>assets/img/casa.png" alt="">
                     <p>Inicio</p>
                 </li>
@@ -24,7 +24,7 @@
 </footer>
 
 <script>
-    document.getElementById('inicio').addEventListener('click', function(){
+    document.getElementById('home').addEventListener('click', function(){
         window.location.href = "<?= URL?>inicio";
     });
 

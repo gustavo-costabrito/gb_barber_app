@@ -8,36 +8,36 @@
         <img style="height: 35px;width: 35px;padding: 5px 15px;" src="<?= URL ?>assets/img/voltar.png" alt="">
         <div class="site">
             <h2 class="tt-info">Suas Informações <span style="color: var(--cor-terciaria);">pessoais</span></h2>
-            <form class="container-info">
+            <form class="container-info" action="" method="post" id="form_atu">
                 <div class="box-info">
                     <label for="">Nome:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="example_nome">
+                        <input type="text" placeholder="example_nome" id="nome_atu" value="<?= $dadosLogin['nome'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">E-mail:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="email@example.com">
+                        <input type="text" placeholder="email@example.com" id="email_atu" value="<?= $dadosLogin['email'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">Whatsapp:</label>
                     <div class="linha-input">
-                        <input id="telefone" placeholder="(11)99999-9999" type="text">
+                        <input id="telefone" placeholder="(11)99999-9999" type="text" id="whatsapp_atu" value="<?= $dadosLogin['whatsapp'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">Senha:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="senha123">
+                        <input type="text" placeholder="<?= $dadosLogin['senha'] ? 'Aperte para alterar senha' : 'Aperte para adicionar senha' ?>" id="senha_atu">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
-                <button class="button-info" type="subit">Salvar</button>
+                <button class="button-info" type="submit">Salvar</button>
             </form>
         </div>
     </section>
@@ -84,6 +84,55 @@
             }
         });
     </script>
+
+
+    <!-- AJAX -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const input = [
+                document.getElementById('nome_atu'),
+                document.getElementById('email_atu'),
+                document.getElementById('whatsapp_atu'),
+                document.getElementById('senha_atu'),
+            ];
+
+            input.forEach(valor => {
+                valor.addEventListener('input', function(){
+                    enviar_formulario();
+                });
+            });
+        });
+
+        function enviar_formulario()
+        {
+            const form = document.getElementById('form_atu');
+
+            form.addEventListener('submit', function(event){
+                event.preventDefault();
+
+                const formulario = new FormData(event.target);
+
+                fetch(`<?= URL?>info/atu_cadastro`, {
+                    method: event.target.method,
+                    body: formulario
+                })
+
+                .then(response => response.json())
+                .then(data => {
+                    if(!data.sucess){
+                        alert(data.error);
+                        console.log(data.error);
+                    } else {
+                        alert(data.error);
+                    }
+                })
+
+                .catch(error => {
+                    console.error(error);
+                })
+            });
+        }
+     </script>
 </body>
 
 </html>

@@ -12,28 +12,28 @@
                 <div class="box-info">
                     <label for="">Nome:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="example_nome" id="nome_atu" value="<?= $dadosLogin['nome'] ?>">
+                        <input type="text" placeholder="example_nome" name="nome_atu" value="<?= $dadosLogin['nome'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">E-mail:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="email@example.com" id="email_atu" value="<?= $dadosLogin['email'] ?>">
+                        <input type="text" placeholder="email@example.com" name="email_atu" value="<?= $dadosLogin['email'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">Whatsapp:</label>
                     <div class="linha-input">
-                        <input id="telefone" placeholder="(11)99999-9999" type="text" id="whatsapp_atu" value="<?= $dadosLogin['whatsapp'] ?>">
+                        <input id="telefone" placeholder="(11)99999-9999" type="text" name="whatsapp_atu" value="<?= $dadosLogin['whatsapp'] ?>">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
                 <div class="box-info">
                     <label for="">Senha:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="<?= $dadosLogin['senha'] ? 'Aperte para alterar senha' : 'Aperte para adicionar senha' ?>" id="senha_atu">
+                        <input type="text" placeholder="<?= $dadosLogin['senha'] ? 'Aperte para alterar senha' : 'Aperte para adicionar senha' ?>" name="senha_atu">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
@@ -88,50 +88,30 @@
 
     <!-- AJAX -->
      <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const input = [
-                document.getElementById('nome_atu'),
-                document.getElementById('email_atu'),
-                document.getElementById('whatsapp_atu'),
-                document.getElementById('senha_atu'),
-            ];
+        document.getElementById('form_atu').addEventListener('submit', function(event){
+            event.preventDefault();
 
-            input.forEach(valor => {
-                valor.addEventListener('input', function(){
-                    enviar_formulario();
-                });
-            });
+            const form = new FormData(event.target);
+
+            fetch(`<?= URL?>info/atualizar_cadastro`, {
+                method: event.target.method,
+                body: form
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                if(!data.sucess){
+                    alert(data.error);
+                    console.log(data);
+                } else {
+                    alert(data.sucess);
+                }
+            })
+
+            .catch(error => {
+                console.error(error);
+            })
         });
-
-        function enviar_formulario()
-        {
-            const form = document.getElementById('form_atu');
-
-            form.addEventListener('submit', function(event){
-                event.preventDefault();
-
-                const formulario = new FormData(event.target);
-
-                fetch(`<?= URL?>info/atu_cadastro`, {
-                    method: event.target.method,
-                    body: formulario
-                })
-
-                .then(response => response.json())
-                .then(data => {
-                    if(!data.sucess){
-                        alert(data.error);
-                        console.log(data.error);
-                    } else {
-                        alert(data.error);
-                    }
-                })
-
-                .catch(error => {
-                    console.error(error);
-                })
-            });
-        }
      </script>
 </body>
 

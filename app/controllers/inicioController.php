@@ -13,12 +13,15 @@ class InicioController extends Controller
 
         foreach($dados as $campo => $valor){
             if(is_null($valor)){
-                echo "erro api";
+                echo "erro api $campo";
             }
         }
 
         $this->render('inicio', $dados);
     }
+
+
+
 
     public function add_comentario(): void
     {

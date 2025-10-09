@@ -33,7 +33,7 @@
                 <div class="box-info">
                     <label for="">Senha:</label>
                     <div class="linha-input">
-                        <input type="text" placeholder="<?= $dadosLogin['senha'] ? 'Aperte para alterar senha' : 'Aperte para adicionar senha' ?>" name="senha_atu">
+                        <input type="text" placeholder="<?= isset($dadosLogin['senha']) ? 'Alterar senha' : 'Adicionar senha' ?>" name="senha_atu">
                         <img style="width: 15px; height: 15px;" src="<?= URL ?>assets/img/lapis.png" alt="">
                     </div>
                 </div>
@@ -100,11 +100,11 @@
 
             .then(response => response.json())
             .then(data => {
-                if(!data.sucess){
+                if(!data.sucesso){
                     alert(data.error);
                     console.log(data);
                 } else {
-                    alert(data.sucess);
+                    alert(data.sucesso);
                 }
             })
 

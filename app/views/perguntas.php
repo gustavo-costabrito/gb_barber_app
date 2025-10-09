@@ -9,16 +9,15 @@
         <div class="site">
             <h2 style="color: #fff; font-size: var(--font-principal); text-align: center;padding: 3rem 1rem;">Minhas <span style="color: var(--cor-terciaria);">Perguntas</span></h2>
 
-            <?php if (!isset($nenhum)) :?>
+            <?php if (!is_null($perguntas) && is_array($perguntas)) : ?>
                 <?php foreach ($perguntas as $atributos) : ?>
-                    <?php extract($atributos)?>
                     <div class="container-perguntas">
                         <div class="tudo-info1" style="display: flex;">
                             <div class="info1-perguntas">
                                 <ul>
-                                    <li class="nome-perguntas"><?= $nome_cliente?></li>
-                                    <li class="gmail-perguntas"><?= Controller::descriptografia($email_cliente)?></li>
-                                    <li class="telefone-perguntas"><?= Controller::descriptografia($email_cliente)?></li>
+                                    <li class="nome-perguntas"><?= $atributos['nome_cliente']?></li>
+                                    <li class="gmail-perguntas"><?= $atributos['email_cliente']?></li>
+                                    <li class="telefone-perguntas"><?= $atributos['whatsapp_cliente']?></li>
                                 </ul>
                             </div>
                             <div class="info2-perguntas">
@@ -28,7 +27,7 @@
 
                         <div class="info3-perguntas">
                             <h2>
-                                Mensagem:<span style="color:rgb(121, 121, 121); font-size: 1.1rem ;"> <?= $mensagem_comentario ?></span>
+                                Mensagem:<span style="color:rgb(121, 121, 121); font-size: 1.1rem ;"> <?= $atributos['mensagem_comentario'] ?></span>
                             </h2>
                         </div>
                         <button class="exibir-perguntas" id="exibir-perguntas">
@@ -43,7 +42,7 @@
 
             <?php else: ?>
 
-                <h2>Nenhum comentario</h2>
+                <h2 class="nenhum-comentario">Nenhum comentário</h2>
 
             <?php endif ?>
         </div>

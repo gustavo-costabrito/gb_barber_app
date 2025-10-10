@@ -1,0 +1,25 @@
+{
+    "id": "/gb_barber_app",
+    "name": "Aplicativo GB Barbearia",
+    "short_name": "GB Barbearia App",
+    "description": "Aplicativo para realizar agendamentos em tempo real para a GB-Barbearia",
+    "version": "1.0.0",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#0057b8",
+    "lang": "pt-BR",
+    "dir": "ltr",
+    "categories": [
+        "business",
+        "beauty",
+        "personal_services",
+        "productivity",
+        "lifestyle"
+    ],
+    "icons": [
+
+    ]
+}

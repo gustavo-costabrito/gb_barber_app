@@ -42,8 +42,12 @@
             </div>
         </div>
 
+        <button id="btnInstalar">instalar</button>
+
         <div class="fundo-login" style="background-image: url(<?= URL ?>assets/img/fundo-login.jpg);"></div>
     </section>
+
+    
 
     <!-- Javascript -->
     <script>
@@ -92,8 +96,8 @@
         });
 
         function formatacao() {
-            if(document.getElementById('whatsappLogin')){
-                document.getElementById('whatsappLogin').addEventListener('input', function(event){
+            if (document.getElementById('whatsappLogin')) {
+                document.getElementById('whatsappLogin').addEventListener('input', function(event) {
                     let valor = event.target.value;
 
                     event.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
@@ -104,28 +108,28 @@
 
     <!-- AJAX -->
     <script>
-        document.getElementById('formLogin').addEventListener('submit', function(event){
+        document.getElementById('formLogin').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const form = new FormData(event.target);
 
-            fetch(`<?= URL?>login/logar`, {
-                method: event.target.method,
-                body: form
-            })
+            fetch(`<?= URL ?>login/logar`, {
+                    method: event.target.method,
+                    body: form
+                })
 
-            .then(response => response.text())
-            .then(data => {
-                if(!data.includes('Sucesso')){
-                    alert(data);
-                } else{
-                    window.location.href = `<?= URL?>inicio`;
-                }
-            })
+                .then(response => response.text())
+                .then(data => {
+                    if (!data.includes('Sucesso')) {
+                        alert(data);
+                    } else {
+                        window.location.href = `<?= URL ?>inicio`;
+                    }
+                })
 
-            .catch(error => {
-                console.error(error);
-            })
+                .catch(error => {
+                    console.error(error);
+                })
         });
     </script>
 

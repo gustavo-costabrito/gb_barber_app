@@ -20,26 +20,26 @@ if(isset($_SESSION['login'])){
 
     <section class="cadastro">
         <div class="site">
-            <form class="form-cadastro" id="formCadastro" action="" method="post">
+            <form class="form-cadastro" id="form_cadastro" action="" method="post">
                 <div class="form-cadastro__title">
                     <h2>Realização do <span>cadastro</span></h2>
                 </div>
                 <div class="form-cadastro__content">
                     <div class="__content__input">
                         <label for="nomeCadastro">Nome:</label>
-                        <input type="text" placeholder="Nome Completo" name="nomeCadastro" id="nomeCadastro">
+                        <input type="text" placeholder="Nome Completo" name="nome_cadastro" id="nomeCadastro">
                     </div>
                     <div class="__content__input">
                         <label for="emailCadastro">E-mail:</label>
-                        <input type="email" placeholder="seuemail@dominio.com" name="emailCadastro" id="emailCadastro">
+                        <input type="email" placeholder="seuemail@dominio.com" name="email_cadastro" id="emailCadastro">
                     </div>
                     <div class="__content__input">
                         <label for="whatsappCadastro">Whatsapp:</label>
-                        <input type="text" placeholder="(00) 00000-0000" name="whatsappCadastro" id="whatsappCadastro" maxlength="15">
+                        <input type="text" placeholder="(00) 00000-0000" name="whatsapp_cadastro" id="whatsappCadastro" maxlength="15">
                     </div>
                     <div class="__content__input">
                         <label for="senhaCadastro">Senha:</label>
-                        <input type="password" placeholder="senha123..." name="senhaCadastro" id="senhaCadastro">
+                        <input type="password" placeholder="senha123..." name="senha_cadastro" id="senhaCadastro">
                     </div>
                     <div class="__content__button">
                         <a href="<?= URL ?>login">
@@ -71,29 +71,28 @@ if(isset($_SESSION['login'])){
 
     <!-- AJAX -->
     <script>
-        document.getElementById('formCadastro').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('form_cadastro').addEventListener('submit', function(event){
+            event.preventDefault();
 
-            const form = e.target;
-            const input = new FormData(form);
+            const form = new FormData(event.target);
 
-            fetch(`<?= URL ?>cadastro/cadastrar`, {
-                method: form.method,
-                body: input
+            fetch(`<?= URL?>cadastro/adicionar_cadastro`, {
+                method: event.target.method,
+                body: form
             })
 
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                if(data.includes("Sucesso")){
+                if(data.sucesso){
+                    alert(data.sucesso);
                     window.location.href = `<?= URL?>inicio`;
-                } else{
-                    alert(data);
-                    console.error(data);
+                } else {
+                    alert(data.error);
+                    console.log(data);
                 }
             })
 
             .catch(error => {
-                alert(error);
                 console.error(error);
             })
         });

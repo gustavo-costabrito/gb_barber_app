@@ -20,37 +20,35 @@ class InicioController extends Controller
         $this->render('inicio', $dados);
     }
 
-
-
-
-    public function add_comentario(): void
+    public function adicionar_comentario(): void
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $input = [
-                'mensagem' => filter_input(INPUT_POST, 'mensagemContato', FILTER_SANITIZE_SPECIAL_CHARS)
-            ];
-
-            if(empty(trim($input['mensagem']))){
-                echo "Insira sua pergunta";
-                return;
-            }
-
-            $payload = Token::validar($_SESSION['login']);
-
-            if(is_null($payload)){
-                die("Token expirado");
-            }
-
-            $addComentario = $this->adicionar_comentario((int)$payload['id'], $input);
-
-            if(is_null($addComentario)){
-                die("Erro ao executar API de adicionar comentario");
-            }
-
-            var_dump ($addComentario);
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
             return;
         }
+
+        $mensagem = filter_input(INPUT_POST, 'mensagem_contato', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
+
+        if(empty(trim($mensagem)) || is_null($mensagem)){
+            http_response_code(422);
+            echo json_encode([
+                'error' => 'Preencha a mensagem que deseja enviar'
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        $apiMensagem = $this->add_comentario($mensagem);
+
+        if(!isset($apiMensagem['sucesso'])){
+            http_response_code(400);
+            echo json_encode($apiMensagem, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        http_response_code(201);
+        echo json_encode($apiMensagem, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
+
+
 
 
     // APIs
@@ -125,19 +123,27 @@ class InicioController extends Controller
         return json_decode($resposta, true);
     }
 
-    private function adicionar_comentario(int $id, array $input): ?array
+    private function add_comentario(string $mensagem): ?array
     {
-        $ch = curl_init(URL_API . 'add_comentario/' . $id);
+        $payload = Token::validar($_SESSION['login'] ?? '');
+
+        if(!$payload){
+            return null;
+        }
+
+        $ch = curl_init(URL_API . 'add_comentario/' . (int)$payload['id']);
 
         curl_setopt_array($ch, [
             CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [
                 'Accept: application/json',
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $_SESSION['login']
+                'Content: application/json',
+                'Authorization: Bearer ' . $_SESSION['login'] ?? ''
             ],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => json_encode($input),
+            CURLOPT_POSTFIELDS => json_encode([
+                'mensagem' => $mensagem
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_SSL_VERIFYPEER => false
         ]);
@@ -154,10 +160,8 @@ class InicioController extends Controller
             return null;
         }
 
-        if($http !== 201){
-            return json_decode($resposta, true);
-        }
+        $resposta = json_decode($resposta, true);
 
-        return json_decode($resposta, true);
+        return $resposta ?: null;
     }
 }

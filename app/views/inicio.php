@@ -1,12 +1,3 @@
-<?php
-
-// if(!isset($_SESSION['login'])){
-//     header('Location: ' . URL . 'login');
-//     exit;
-// }
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php require_once(__DIR__ . '/includes/head.php') ?>
@@ -19,17 +10,12 @@
             <div class="site">
                 <h2>
                     Seja bem vindo,
-                    <?php
-                    
-                    $nome = str_word_count($dadosLogin['nome'], 1);
+                    <?php 
 
-                    $nomeExibido = [
-                        $nome[0],
-                        $nome[1]
-                    ];
+                    $nome = str_word_count($dadosLogin['nome'], 1, 'áéíóúÁÉÍÓÚãõâêôçÇ');
 
-                    echo implode(' ', $nomeExibido);
-                    
+                    echo $nome[0];
+
                     ?>
                 </h2>
                 <div class="banner__content">
@@ -81,7 +67,7 @@
         <section class="contato">
             <div class="site">
                 <h2>Tem uma duvida?<span> <br>Compartilhe conosco</span></h2>
-                <form action="" method="post" id="comentario">
+                <form action="" method="post" id="form_comentario">
                     <div class="nomeContato">
                         <label for="nomeContato">Nome:</label>
                         <input type="text" placeholder="Seu Nome Completo" value="<?= $dadosLogin['nome']?>" name="nomeContato" id="nomeContato" disabled>
@@ -96,7 +82,7 @@
                     </div>
                     <div class="mensagemContato">
                         <label for="mensagemContato">Mensagem:</label>
-                        <textarea name="mensagemContato" placeholder="Sua mensagem que sera respondida..." id="mensagemContato"></textarea>
+                        <textarea name="mensagemContato" placeholder="Sua mensagem que sera respondida..." minlength="10" id="mensagemContato" required></textarea>
                     </div>
                     <div class="btnEnviarLimpar">
                         <p id="limparForm">Limpar campo da mensagem</p>
@@ -106,26 +92,31 @@
 
                 <!-- AJAX Comentario -->
                  <script>
-                    document.getElementById('comentario').addEventListener('submit', function(e){
-                        e.preventDefault();
+                    document.getElementById('form_comentario').addEventListener('submit', function(event){
+                        event.preventDefault();
 
-                        const form = e.target;
-                        const input = new FormData(form);
+                        const form = new FormData(event.target);
 
-                        fetch(`<?= URL?>inicio/add_comentario`, {
-                            method: form.method,
-                            body: input
+                        fetch(`<?= URL?>inicio/adicionar_comentario`, {
+                            method: event.target.method,
+                            body: form
                         })
 
-                        .then(response => response.text())
+                        .then(response => response.json())
                         .then(data => {
-                            alert(data);
-                            window.location.href = "<?= URL?>perguntas";
+                            if(data.sucesso){
+                                alert(data.sucesso);
+                                window.location.href = `<?= URL?>perguntas`;
+                            } else {
+                                alert(data.error);
+                                console.log(data);
+                            }
                         })
+
 
                         .catch(error => {
                             console.error(error);
-                        }) 
+                        })
                     });
                  </script>
             </div>

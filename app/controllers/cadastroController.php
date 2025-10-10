@@ -9,46 +9,60 @@ class CadastroController extends Controller
         $this->render('cadastro', $dados);
     }
 
-    public function cadastrar(): void
+    public function adicionar_cadastro(): void
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $input = [
-                'nome' => filter_input(INPUT_POST, 'nomeCadastro', FILTER_SANITIZE_SPECIAL_CHARS),
-                'email' => filter_input(INPUT_POST, 'emailCadastro', FILTER_SANITIZE_EMAIL),
-                'whatsapp' => filter_input(INPUT_POST, 'whatsappCadastro', FILTER_SANITIZE_SPECIAL_CHARS),
-                'senha' => filter_input(INPUT_POST, 'senhaCadastro', FILTER_SANITIZE_SPECIAL_CHARS)
-            ];
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            return;
+        }
 
-            foreach($input as $campo => $valor){
+        $input = [
+            'nome' => filter_input(INPUT_POST, 'nome_cadastro', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
+            'email' => filter_input(INPUT_POST, 'email_cadastro', FILTER_SANITIZE_EMAIL, FILTER_NULL_ON_FAILURE),
+            'whatsapp' => filter_input(INPUT_POST, 'whatsapp_cadastro', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
+            'senha' => $_POST['senha_cadastro'] ?? null
+        ];
+
+        foreach($input as $valor){
+            if(is_null($valor)){
+                http_response_code(400);
+                echo json_encode([
+                    'error' => 'Nao foi possivel realizar o seu cadastro, tentar novamente'
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                return;
+            } else {
                 if(empty(trim($valor))){
-                    echo match($campo){
-                        'nome' => 'Seu nome não foi preenchido, tentar novamente com todos os campos preenchidos',
-                        'email' => 'Seu E-mail não foi preenchido, tentar novamente com todos os campos preenchidos',
-                        'whatsapp' => 'Seu número de Whatsapp não foi preenchido, tentar novamente com todos os campos preenchidos',
-                        'senha' => 'Sua senha não foi preenchida, tentar novamente com todos os campos preenchidos'
-                    };
+                    http_response_code(422);
+                    echo json_encode([
+                        'error' => 'Preencha todos os campos'
+                    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                     return;
                 }
             }
+        }
 
-            $api = $this->add_cadastro($input);
+        $apiCadastro = $this->add_cadastro($input);
 
-            if(is_null($api)){
-                die("Erro ao executar API de cadastro");
-            }
-
-            if(!isset($api['sucesso'])){
-                foreach($api as $valor){
-                    echo $valor . "\n";
-                }
-                return;
-            }
-
-            $_SESSION['login'] = $api['sucesso'];
-
-            echo "Sucesso";
+        if(is_null($apiCadastro)){
+            http_response_code(500);
+            echo json_encode([
+                'error' => 'Erro ao realizar cadastro, tentar novamente mais tarde'
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
             return;
         }
+
+        if(!isset($apiCadastro['sucesso'])){
+            http_response_code(400);
+            echo json_encode($apiCadastro, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        $_SESSION['login'] = $apiCadastro['sucesso'] ?? null;
+
+        http_response_code(201);
+        echo json_encode([
+            'sucesso' => 'Cadastro realizado com sucesso'
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return;
     }
 
 
@@ -67,7 +81,7 @@ class CadastroController extends Controller
                 'Accept: application/json',
                 'Content-Type: application/json'
             ],
-            CURLOPT_POSTFIELDS => json_encode($input, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            CURLOPT_POSTFIELDS => json_encode($input),
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_SSL_VERIFYPEER => false
         ]);
@@ -78,14 +92,14 @@ class CadastroController extends Controller
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+        curl_close($ch);
+
         if($erro){
             return null;
         }
 
-        if($http !== 200){
-            return json_decode($resposta, true);
-        }
+        $resposta = json_decode($resposta, true);
 
-        return json_decode($resposta, true);
+        return $resposta ?: null;
     }
 }

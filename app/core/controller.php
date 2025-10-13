@@ -110,24 +110,42 @@ class Controller
         return;
     }
 
-    public static function descriptografia(string $crypto): string|bool
+    public static function descriptografia(string $crypto): string|int|null
     {
-        $bytes = base64_decode($crypto);
+        if (empty($crypto)) {
+            return null;
+        }
 
-        $iv = substr($bytes, 0, openssl_cipher_iv_length(METHOD_CRYPTO));
+        $iv = substr($crypto, 0, openssl_cipher_iv_length(METHOD_CRYPTO));
 
-        $tag = substr($bytes, strlen($iv), 16);
+        if (empty($iv)) {
+            return null;
+        }
 
-        $crypto = substr($bytes, (strlen($iv) + strlen($tag)));
+        $tag = substr($crypto, strlen($iv), 16);
+
+        if (empty($tag)) {
+            return null;
+        }
+
+        $dados = substr($crypto, (strlen($iv) + strlen($tag)));
+
+        if (empty($dados)) {
+            return null;
+        }
 
         $key = base64_decode($_ENV['CRYPTO_KEY']);
 
-        $normal = openssl_decrypt($crypto, METHOD_CRYPTO, $key, OPENSSL_RAW_DATA, $iv, $tag);
+        $normal = openssl_decrypt($dados, METHOD_CRYPTO, $key, OPENSSL_RAW_DATA, $iv, $tag);
 
-        if(!$normal){
-            return false;
-        } else{
-            return $normal;
+        if (!$normal) {
+            return null;
+        }
+
+        if(is_numeric($normal)){
+            return (int)$normal ?: null;
+        } else {
+            return $normal ?: null;
         }
     }
 

@@ -29,7 +29,6 @@ class InicioController extends Controller
         $mensagem = filter_input(INPUT_POST, 'mensagem_contato', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
 
         if(empty(trim($mensagem)) || is_null($mensagem)){
-            http_response_code(422);
             echo json_encode([
                 'error' => 'Preencha a mensagem que deseja enviar'
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -39,12 +38,10 @@ class InicioController extends Controller
         $apiMensagem = $this->add_comentario($mensagem);
 
         if(!isset($apiMensagem['sucesso'])){
-            http_response_code(400);
             echo json_encode($apiMensagem, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
             return;
         }
 
-        http_response_code(201);
         echo json_encode($apiMensagem, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 

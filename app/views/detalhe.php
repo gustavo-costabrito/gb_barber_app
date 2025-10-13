@@ -11,9 +11,11 @@
         <section class="detalhe">
             <div class="site">
                 <div class="tituloTela">
+                <div>
                     <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
-                    <h2>Saiba mais sobre esse <span>servico:</span></h2>
+                    <h2>Conheca esse <span>servico:</span></h2>
                 </div>
+            </div>
                 <div class="conteudoDetalhe">
                     <div class="servicoCombo" style="background-image: url(<?= URL_UPLOAD?><?= $imagem_combo ?? $imagem_servico?>);">
                         <p><?= $descricao_combo ?? $descricao_servico ?></p>

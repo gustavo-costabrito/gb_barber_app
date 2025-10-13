@@ -82,7 +82,7 @@
                     </div>
                     <div class="mensagemContato">
                         <label for="mensagemContato">Mensagem:</label>
-                        <textarea name="mensagemContato" placeholder="Sua mensagem que sera respondida..." minlength="10" id="mensagemContato" required></textarea>
+                        <textarea name="mensagem_contato" placeholder="Sua mensagem que sera respondida..." minlength="10" id="mensagemContato" required></textarea>
                     </div>
                     <div class="btnEnviarLimpar">
                         <p id="limparForm">Limpar campo da mensagem</p>
@@ -105,10 +105,10 @@
                         .then(response => response.json())
                         .then(data => {
                             if(data.sucesso){
-                                alert(data.sucesso);
+                                mostrarAlerta(data.sucesso);
                                 window.location.href = `<?= URL?>perguntas`;
                             } else {
-                                alert(data.error);
+                                mostrarAlerta(data.error, 'error');
                                 console.log(data);
                             }
                         })

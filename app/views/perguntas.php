@@ -5,9 +5,13 @@
 <body>
     <?php require_once('includes/header.php') ?>
     <section style="background-color: var(--cor-principal);" class="perguntas">
-        <img id="inicio" style="height: 35px;width: 35px;padding: 5px 15px;" src="<?= URL ?>assets/img/voltar.png" alt="">
-        <div class="site">
-            <h2 style="color: #fff; font-size: var(--font-principal); text-align: center;padding: 3rem 1rem;">Minhas <span style="color: var(--cor-terciaria);">Perguntas</span></h2>
+        <div class="site" style="display: grid; gap: 3rem;">
+            <div class="tituloTela">
+                <div>
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
+                    <h2>Minhas <span>perguntas:</span></h2>
+                </div>
+            </div>
 
             <?php if (!is_null($perguntas) && is_array($perguntas)) : ?>
                 <?php foreach ($perguntas as $atributos) : ?>

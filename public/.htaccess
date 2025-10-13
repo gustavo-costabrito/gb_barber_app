@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteBase /gb_barber_app/public/
+RewriteBase /codexdev/gb_barber_app/public/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

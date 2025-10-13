@@ -24,14 +24,12 @@ class CadastroController extends Controller
 
         foreach($input as $valor){
             if(is_null($valor)){
-                http_response_code(400);
                 echo json_encode([
                     'error' => 'Nao foi possivel realizar o seu cadastro, tentar novamente'
                 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                 return;
             } else {
                 if(empty(trim($valor))){
-                    http_response_code(422);
                     echo json_encode([
                         'error' => 'Preencha todos os campos'
                     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -43,7 +41,6 @@ class CadastroController extends Controller
         $apiCadastro = $this->add_cadastro($input);
 
         if(is_null($apiCadastro)){
-            http_response_code(500);
             echo json_encode([
                 'error' => 'Erro ao realizar cadastro, tentar novamente mais tarde'
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -51,14 +48,12 @@ class CadastroController extends Controller
         }
 
         if(!isset($apiCadastro['sucesso'])){
-            http_response_code(400);
             echo json_encode($apiCadastro, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
             return;
         }
 
         $_SESSION['login'] = $apiCadastro['sucesso'] ?? null;
 
-        http_response_code(201);
         echo json_encode([
             'sucesso' => 'Cadastro realizado com sucesso'
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

@@ -1,6 +1,6 @@
 <?php
 
-define('URL', 'https://localhost/gb_barber_app/public/');
+define('URL', 'https://agenciatipi03.smpsistema.com.br/codexdev/gb_barber_app/public/');
 
 define('URL_API', 'https://localhost/gb_barber/public/api/');
 

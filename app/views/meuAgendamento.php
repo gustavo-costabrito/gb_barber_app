@@ -9,9 +9,11 @@
         <section class="meuAgendamento">
             <div class="site">
                 <div class="tituloTela">
+                <div>
                     <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
                     <h2>Meus <span>agendamentos:</span></h2>
                 </div>
+            </div>
                 <div class="conteudoMeuAgendamento">
                     <div class="caixaAgendamento concluido">
                         <div class="caixaAgendamento__dadosCliente">

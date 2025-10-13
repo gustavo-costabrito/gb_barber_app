@@ -28,7 +28,6 @@ class AgendamentoController extends Controller
 
             foreach ($input as $campo => $valor) {
                 if (is_null($valor) || empty(trim($valor)) || (int)$valor < 1) {
-                    http_response_code(422);
                     echo json_encode([
                         'error' => 'Preencher todos os campos'
                     ], JSON_UNESCAPED_SLASHES |  JSON_UNESCAPED_UNICODE);
@@ -40,10 +39,9 @@ class AgendamentoController extends Controller
 
             $validado['servico'] = (int)$input['servico'];
 
-            $payload = Token::validar($_SESSION['login']);
+            $payload = Token::validar($_SESSION['login'] ?? '');
 
             if (is_null($payload)) {
-                http_response_code(400);
                 echo json_encode([
                     'error' => 'Token expirado'
                 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -53,7 +51,7 @@ class AgendamentoController extends Controller
             $cliente = (int)$payload['id'];
 
             $apiAgendamento = $this->add_agendamento($validado, $cliente);
-            
+
             if (is_null($apiAgendamento)) {
                 echo json_encode([
                     'error' => 'Erro ao adicionar agendamento'
@@ -62,16 +60,15 @@ class AgendamentoController extends Controller
             }
 
             if (!isset($apiAgendamento['sucesso'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'error' => $apiAgendamento['erro']
-                ]);
+                echo json_encode(
+                    $apiAgendamento,
+                    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+                );
                 return;
             }
 
-            http_response_code(200);
             echo json_encode([
-                'sucess' => $apiAgendamento['sucesso']
+                'sucesso' => $apiAgendamento['sucesso']
             ]);
             return;
         }
@@ -199,7 +196,7 @@ class AgendamentoController extends Controller
         return $resposta;
     }
 
-    private function add_agendamento(array $input, $cliente): ?array
+    private function add_agendamento(array $input, int $cliente): ?array
     {
         foreach ($input as $valor) {
             if (empty(trim($valor)) || is_null($valor) || !$valor) {
@@ -224,7 +221,6 @@ class AgendamentoController extends Controller
 
         $resposta = curl_exec($ch);
 
-
         $erro = curl_error($ch);
 
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -242,40 +238,34 @@ class AgendamentoController extends Controller
 
     public function listar_horarios_data(int $id_data): void
     {
-        $ch = curl_init(URL_API . 'listar_horarios_data/' . $id_data);
+        header('Content-Type: application/json; charset=utf-8');
 
+        if ($id_data <= 0) {
+            echo json_encode(['erro' => 'Data indisponível']);
+            return;
+        }
+
+        $url = URL_API . 'listar_horarios_data/' . $id_data;
+
+        $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Accept: application/json'
-            ],
+            CURLOPT_HTTPHEADER => ['Accept: application/json'],
             CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_TIMEOUT => 10
         ]);
 
         $resposta = curl_exec($ch);
-
         $erro = curl_error($ch);
-
         $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
         curl_close($ch);
 
-        if ($erro) {
-            echo "Erro";
+        if ($erro || !$resposta || $http !== 200) {
+            echo json_encode(['erro' => 'Data indisponível']);
             return;
         }
 
-        $resposta = json_decode($resposta, true);
-
-        if ($http !== 200) {
-            echo "Erro";
-            return;
-        }
-
-        foreach ($resposta as $atributos) {
-            echo "<option value=\"$atributos[id_data_horario]\" id=\"horarioPadrao\">$atributos[hora_inicio]</option>";
-        }
-        return;
+        echo $resposta; // já é JSON vindo da API
     }
 }

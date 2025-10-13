@@ -3,15 +3,17 @@
 <?php require_once(__DIR__ . '/includes/head.php') ?>
 
 <body>
-    <header class="yes-login">
-        <div class="site">
-            <h2>GB-Barbearia</h2>
-            <img src="<?= URL ?>assets/img/fechar.png" alt="Botão de voltar para página anterior" id="fechar">
-        </div>
-    </header>
+
+    <?php require_once(__DIR__ . '/includes/header.php') ?>
 
     <section id="hidden" class="menu">
         <div class="site">
+            <div class="tituloTela">
+                <div>
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
+                    <h2>Meus <span>agendamentos:</span></h2>
+                </div>
+            </div>
             <div class="conteiner-menu">
                 <div class="box-menu" data-url="info">
                     <img src="<?= URL ?>assets/img/perfil.png" alt="">
@@ -28,7 +30,7 @@
                     <h2>Minhas perguntas</h2>
                 </div>
 
-                <div class="box-menu" data-url="notificacao">
+                <div class="box-menu" data-url="notificacoes">
                     <img src="<?= URL ?>assets/img/notificacao.png" alt="">
                     <h2>Minhas notificações</h2>
                 </div>
@@ -43,20 +45,20 @@
     </section>
 
     <script>
-        document.getElementById('fechar').addEventListener('click', function(){
+        document.getElementById('fechar').addEventListener('click', function() {
             history.back();
         });
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
+        document.addEventListener('DOMContentLoaded', function() {
             const menu = document.querySelectorAll('.box-menu');
 
             menu.forEach((valor) => {
-                valor.addEventListener('click', function(){
+                valor.addEventListener('click', function() {
                     const url = this.dataset.url;
 
-                    window.location.href = `<?= URL?>${url}`;
+                    window.location.href = `<?= URL ?>${url}`;
                 });
             });
         });

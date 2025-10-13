@@ -5,9 +5,13 @@
 <body>
     <?php require_once(__DIR__ . "/includes/header.php") ?>
     <section class="info">
-        <img style="height: 35px;width: 35px;padding: 5px 15px;" src="<?= URL ?>assets/img/voltar.png" alt="">
         <div class="site">
-            <h2 class="tt-info">Suas Informações <span style="color: var(--cor-terciaria);">pessoais</span></h2>
+            <div class="tituloTela">
+                <div>
+                    <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
+                    <h2>Informacoes do <span>cadastro:</span></h2>
+                </div>
+            </div>
             <form class="container-info" action="" method="post" id="form_atu">
                 <div class="box-info">
                     <label for="">Nome:</label>
@@ -41,8 +45,56 @@
             </form>
         </div>
     </section>
+
+
     <?php require_once(__DIR__ . "/includes/footer.php") ?>
+
+
     <script>
+        function mostrarAlerta(texto, tipo = 'success') {
+            const config = {
+                success: {
+                    titulo: 'Sucesso!',
+                    mensagem: texto
+                },
+                error: {
+                    titulo: 'Erro!',
+                    mensagem: texto
+                }
+            };
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${tipo}`;
+            alertDiv.innerHTML = `
+                <div class="alert-icon"></div>
+                <div class="alert-content">
+                    <div class="alert-title">${config[tipo].titulo}</div>
+                    <div class="alert-message">${config[tipo].mensagem}</div>
+                </div>
+                <button class="alert-close" onclick="fecharAlerta(this)">×</button>
+                <div class="alert-progress"></div>
+            `;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                fecharAlerta(alertDiv);
+            }, 5000);
+        }
+
+        function fecharAlerta(elemento) {
+            const alert = elemento.classList ? elemento : elemento.parentElement;
+            alert.classList.remove('show');
+            alert.classList.add('hide');
+
+            setTimeout(() => {
+                alert.remove();
+            }, 400);
+        }
         // Função para formatar o telefone no padrão (XX) XXXXX-XXXX
         function formatarTelefone(input) {
             // Remove tudo que não é dígito
@@ -87,32 +139,33 @@
 
 
     <!-- AJAX -->
-     <script>
-        document.getElementById('form_atu').addEventListener('submit', function(event){
+    <script>
+        document.getElementById('form_atu').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const form = new FormData(event.target);
 
-            fetch(`<?= URL?>info/atualizar_cadastro`, {
-                method: event.target.method,
-                body: form
-            })
+            fetch(`<?= URL ?>info/atualizar_cadastro`, {
+                    method: event.target.method,
+                    body: form
+                })
 
-            .then(response => response.json())
-            .then(data => {
-                if(!data.sucesso){
-                    alert(data.error);
-                    console.log(data);
-                } else {
-                    alert(data.sucesso);
-                }
-            })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.sucesso) {
+                        mostrarAlerta(data.error, 'error');
+                        console.log(data);
+                    } else {
+                        mostrarAlerta(data.sucesso);
+                        location.reload();
+                    }
+                })
 
-            .catch(error => {
-                console.error(error);
-            })
+                .catch(error => {
+                    console.error(error);
+                })
         });
-     </script>
+    </script>
 </body>
 
 </html>

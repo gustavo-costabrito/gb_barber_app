@@ -14,84 +14,74 @@ class LoginController extends Controller
         $this->render('login', $dados);
     }
 
-    public function logar(): void
+    public function verificar_login(): void
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $email = filter_input(INPUT_POST, 'emailLogin', FILTER_SANITIZE_EMAIL);
-
-            if(isset($_POST['senhaLogin'])){
-                $senha = filter_input(INPUT_POST, 'senhaLogin', FILTER_SANITIZE_SPECIAL_CHARS);
-            } else {
-                $whatsapp = filter_input(INPUT_POST, 'whatsappLogin', FILTER_SANITIZE_SPECIAL_CHARS);
-            }
-
-            if(empty(trim($email))){
-                echo "Seu E-mail nao foi preenchido, tentar novamente com todos os campos preenchidos";
-                return;
-            }
-
-            if(isset($senha)){
-                if(empty(trim($senha))){
-                    echo 'Sua senha nao foi preenchida, tentar novamente com todos os campos preenchidos';
-                    return;
-                }
-            } 
-
-            if(isset($whatsapp)){
-                if(empty(trim($whatsapp))){
-                    echo 'Seu numero de Whatsapp nao foi preenchido, tentar novamente com todos os campos preenchidos';
-                    return;
-                }
-            }
-
-
-            $input = [
-                'email' => $email,
-                'senha' => $senha ?? null,
-                'whatsapp' => $whatsapp ?? null
-            ];
-
-
-            if(is_null($input['senha'])){
-                unset($input['senha']);
-
-                $resposta = $this->login_whatsapp($input);
-
-                if(is_null($resposta)){
-                    die('Erro na API de login de senha');
-                }
-
-            } else{
-                unset($input['whatsapp']);
-
-                $resposta = $this->login_senha($input);
-
-                if(is_null($resposta)){
-                    die('Erro na API de login de whatsapp');
-                }
-            }
-
-            if(!isset($resposta['sucesso'])){
-                foreach($resposta as $valor){
-                    echo $valor;
-                }
-
-                return;
-            }
-
-            echo 'Sucesso';
-
-            $_SESSION['login'] = $resposta['sucesso'];
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
             return;
         }
+
+        $input = [
+            'email' => filter_input(INPUT_POST, 'email_login', FILTER_SANITIZE_EMAIL, FILTER_NULL_ON_FAILURE)
+        ];
+
+        if(isset($_POST['whatsapp_login'])){
+            $input['whatsapp'] = filter_input(INPUT_POST, 'whatsapp_login', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
+        } else {
+            $input['senha'] = $_POST['senha_login'] ?? null;
+        }
+
+        foreach($input as $campo => $valor){
+            if(is_null($valor)){
+                echo json_encode([
+                    'error' => match($campo){
+                        'email' => 'E-mail nao identificado',
+                        'whatsapp' => 'Whatsapp nao identificado',
+                        'senha' => 'Senha nao identificada'
+                    }
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                return;
+            } else {
+                if(empty(trim($valor))){
+                    echo json_encode([
+                        'error' => match($campo){
+                            'email' => 'E-mail nao foi preenchido',
+                            'whatsapp' => 'Whatsapp nao foi preenchido',
+                            'senha' => 'Senha nao foi preenchida'
+                        }
+                    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                    return;
+                }
+            }
+        }
+
+        $apiLogin = $this->login_cliente($input);
+
+        if(is_null($apiLogin)){
+            echo json_encode([
+                'error' => 'Nao foi possivel realizar a vericacao no momento'
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        if(isset($apiLogin['error'])){
+            echo json_encode($apiLogin, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        $_SESSION['login'] = $apiLogin['sucesso'] ?? '';
+
+        echo json_encode([
+            'sucesso' => 'Login realizado com sucesso'
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return;
     }
 
 
 
     // APIs
-    private function login_senha(array $input): ?array
+    private function login_cliente(array $input): ?array
     {
-        $ch = curl_init(URL_API . 'login_senha');
+        $ch = curl_init(URL_API . 'login_cliente');
 
         curl_setopt_array($ch, [
             CURLOPT_POST => true,
@@ -100,7 +90,7 @@ class LoginController extends Controller
                 'Accept: application/json',
                 'Content-Type: application/json'
             ],
-            CURLOPT_POSTFIELDS => json_encode($input, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            CURLOPT_POSTFIELDS => json_encode($input),
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_SSL_VERIFYPEER => false
         ]);
@@ -119,47 +109,6 @@ class LoginController extends Controller
 
         $resposta = json_decode($resposta, true);
 
-        if($http !== 200){
-            return $resposta;
-        }
-
-        return $resposta;
-    }
-
-    private function login_whatsapp(array $input): ?array
-    {
-        $ch = curl_init(URL_API . 'login_whatsapp');
-
-        curl_setopt_array($ch, [
-            CURLOPT_POST => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Accept: application/json',
-                'Content-Type: application/json'
-            ],
-            CURLOPT_POSTFIELDS => json_encode($input, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false
-        ]);
-
-        $resposta = curl_exec($ch);
-
-        $erro = curl_error($ch);
-
-        $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        if($erro){
-            return null;
-        }
-
-        $resposta = json_decode($resposta, true);
-
-        if($http !== 200){
-            return $resposta;
-        }
-
-        return $resposta;
+        return $resposta ?: null;
     }
 }

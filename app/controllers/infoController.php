@@ -112,7 +112,7 @@ class infoController extends Controller{
         $ch = curl_init(URL_API . 'atu_cadastro/' . (int)$payload['id']);
 
         curl_setopt_array($ch, [
-            CURLOPT_CUSTOMREQUEST => 'PATCH',
+            CURLOPT_CUSTOMREQUEST => 'PUT',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [
                 'Accept: application/json',

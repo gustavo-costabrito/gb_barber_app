@@ -87,7 +87,7 @@ if(isset($_SESSION['login'])){
                     alert(data.sucesso);
                     window.location.href = `<?= URL?>inicio`;
                 } else {
-                    alert(data.error);
+                    mostrarAlerta(data.error, 'error');
                     console.log(data);
                 }
             })

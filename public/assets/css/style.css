@@ -812,7 +812,7 @@ html {
 /* Detalhes */
 .detalhe {
     background-color: var(--cor-principal);
-    min-height: 78vh;
+    min-height: calc(100dvh - 200px);
     display: grid;
 
     .site {
@@ -843,18 +843,6 @@ html {
                 border: solid 2px var(--cor-terciaria);
                 border-radius: 20px;
 
-                .fundoServicoCombo {
-                    position: absolute;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    height: 300px;
-                    width: 400px;
-                    background-color: var(--cor-principal);
-                    opacity: 0.6;
-                    border-radius: 20px;
-                }
-
                 p,
                 .nomeValor {
                     z-index: 1;
@@ -871,17 +859,22 @@ html {
                     justify-content: space-between;
                 }
 
-                button {
-                    background-color: var(--cor-secundaria);
-                    color: var(--cor-terciaria);
-                    font-size: var(--font-terciaria);
-                    width: 35%;
-                    height: 2rem;
-                    z-index: 1;
-                    border: none;
-                    border-radius: 10px;
-                    margin-left: 15.4rem;
+                .horaBtn{
+                    display: flex;
+                    justify-content: space-around;
+
+                    button {
+                        background-color: var(--cor-secundaria);
+                        color: var(--cor-terciaria);
+                        font-size: var(--font-terciaria);
+                        width: 35%;
+                        height: 2rem;
+                        z-index: 1;
+                        border: none;
+                        border-radius: 10px;
+                    }
                 }
+
             }
 
             >button {

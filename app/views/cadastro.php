@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SESSION['login'])){
+if (isset($_SESSION['login'])) {
     header('Location: ' . URL . 'inicio');
     exit;
 }
@@ -55,46 +55,93 @@ if(isset($_SESSION['login'])){
     </section>
 
     <!-- Javacript -->
-     <script>
-        document.getElementById('whatsappCadastro').addEventListener('input', function(event){
+    <script>
+        document.getElementById('whatsappCadastro').addEventListener('input', function(event) {
             let valor = event.target.value;
 
             valor = valor.replace(/\D/g, '');
 
-            if(valor.lenght < 15){
+            if (valor.lenght < 15) {
                 event.target.value = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
-            } else{
+            } else {
                 event.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
             }
         });
-     </script>
+
+
+
+        function mostrarAlerta(texto, tipo = 'success') {
+            const config = {
+                success: {
+                    titulo: 'Sucesso!',
+                    mensagem: texto
+                },
+                error: {
+                    titulo: 'Erro!',
+                    mensagem: texto
+                }
+            };
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${tipo}`;
+            alertDiv.innerHTML = `
+                <div class="alert-icon"></div>
+                <div class="alert-content">
+                    <div class="alert-title">${config[tipo].titulo}</div>
+                    <div class="alert-message">${config[tipo].mensagem}</div>
+                </div>
+                <button class="alert-close" onclick="fecharAlerta(this)">×</button>
+                <div class="alert-progress"></div>
+            `;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                fecharAlerta(alertDiv);
+            }, 5000);
+        }
+
+        function fecharAlerta(elemento) {
+            const alert = elemento.classList ? elemento : elemento.parentElement;
+            alert.classList.remove('show');
+            alert.classList.add('hide');
+
+            setTimeout(() => {
+                alert.remove();
+            }, 400);
+        }
+    </script>
 
     <!-- AJAX -->
     <script>
-        document.getElementById('form_cadastro').addEventListener('submit', function(event){
+        document.getElementById('form_cadastro').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const form = new FormData(event.target);
 
-            fetch(`<?= URL?>cadastro/adicionar_cadastro`, {
-                method: event.target.method,
-                body: form
-            })
+            fetch(`<?= URL ?>cadastro/adicionar_cadastro`, {
+                    method: event.target.method,
+                    body: form
+                })
 
-            .then(response => response.json())
-            .then(data => {
-                if(data.sucesso){
-                    alert(data.sucesso);
-                    window.location.href = `<?= URL?>inicio`;
-                } else {
-                    mostrarAlerta(data.error, 'error');
-                    console.log(data);
-                }
-            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sucesso) {
+                        alert(data.sucesso);
+                        window.location.href = `<?= URL ?>inicio`;
+                    } else {
+                        mostrarAlerta(data.error, 'error');
+                        console.log(data);
+                    }
+                })
 
-            .catch(error => {
-                console.error(error);
-            })
+                .catch(error => {
+                    console.error(error);
+                })
         });
     </script>
 </body>

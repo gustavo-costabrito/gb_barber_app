@@ -1,10 +1,10 @@
 <?php
 
-define('URL', 'https://agenciatipi03.smpsistema.com.br/codexdev/gb_barber_app/public/');
+define('URL', 'http://localhost/gb_barber_app/public/');
 
-define('URL_API', 'https://localhost/gb_barber/public/api/');
+define('URL_API', 'http://localhost/gb_barber/public/api/');
 
-define('URL_UPLOAD', 'https://localhost/gb_barber/public/upload/');
+define('URL_UPLOAD', 'http://localhost/gb_barber/public/upload/');
 
 define('METHOD_CRYPTO', 'AES-256-GCM');
 

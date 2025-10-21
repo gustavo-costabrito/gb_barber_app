@@ -79,15 +79,9 @@ class AgendamentoController extends Controller
     // Pagina meus agendamentos
     public function meus_agendamentos(): void
     {
-        $payload = Token::validar($_SESSION['login']);
-
-        if (is_null($payload)) {
-            header('Location: ' . URL . 'login');
-            exit;
-        }
-
-
-        $dados = [];
+        $dados = [
+            'agendamentos' => $this->listar_agendamentos()
+        ];
 
         $this->render('meuAgendamento', $dados);
     }
@@ -97,6 +91,45 @@ class AgendamentoController extends Controller
 
 
     // APIs
+    private function listar_agendamentos(): ?array
+    {
+        $token = $_SESSION['login'] ?? '';
+
+        $payload = Token::validar($token);
+
+        if (!$payload) {
+            return null;
+        }
+
+        $ch = curl_init(URL_API . 'listar_agendamentos/' . (int)$payload['id']);
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+                'Authorization: Bearer ' . $token
+            ],
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_SSL_VERIFYPEER => false
+        ]);
+
+        $resposta = curl_exec($ch);
+
+        $erro = curl_error($ch);
+
+        $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        if ($erro) {
+            return null;
+        }
+
+        $resposta = json_decode($resposta, true);
+
+        return $resposta;
+    }
+
     private function data_agendamento(): ?array
     {
         $ch = curl_init(URL_API . 'listar_datas');

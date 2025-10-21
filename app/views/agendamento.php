@@ -11,7 +11,7 @@
                 <div class="tituloTela">
                     <div>
                         <img src="<?= URL ?>assets/img/voltar.png" alt="Botão de voltar para página anterior" id="voltar">
-                        <h2>Meus <span>agendamentos:</span></h2>
+                        <h2>Realizar <span>agendamento:</span></h2>
                     </div>
                 </div>
                 <div class="conteudoAgendamento">

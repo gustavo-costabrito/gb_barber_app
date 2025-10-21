@@ -29,12 +29,8 @@
 
 
     <script>
-        document.getElementById("inicio").addEventListener("click", () => {
-            window.location.href = "<?= URL ?>menu";
-        });
-
         document.addEventListener('DOMContentLoaded', function() {
-            const URL = 'https://localhost/gb_barber_app/public/';
+            const URL = 'http://localhost/gb_barber_app/public/';
 
             document.querySelectorAll('.button-todos-servicos').forEach((valor) => {
                 valor.addEventListener('click', function() {

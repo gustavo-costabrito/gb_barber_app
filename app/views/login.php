@@ -45,7 +45,7 @@
         <div class="fundo-login" style="background-image: url(<?= URL ?>assets/img/fundo-login.jpg);"></div>
     </section>
 
-    <div class="instalar-app" id="instalar">
+    <div class="instalar-app" id="instalar" style="display: none;">
         <h2>Deseja instalar o <span>aplicativo?</span></h2>
         <div>
             <button id="btnFechar" type="button">Cancelar</button>
